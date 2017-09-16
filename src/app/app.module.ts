@@ -8,11 +8,13 @@ import {CommonModule} from "@angular/common";
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {WineService} from "./wine.service";
+import { WineClassifyComponent } from './wine-classify/wine-classify.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WineComponent,
+    WineClassifyComponent,
 
   ],
   imports: [

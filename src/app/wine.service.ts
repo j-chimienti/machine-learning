@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 
 const WHITE_WINE_DATA = require('./wine/wine.quality.white.json');
 const RED_WINE_DATA = require('./wine/wine.quality.red.json');
+const WINE_CLASSIFY = require('./wine/wine.classify.json');
 
 
 const whiteWine = {
@@ -46,6 +47,32 @@ const redWine = {
 }
 
 
+const classifiedWine = {
+
+  score: 0.648148148148,
+  predict: `2 3 2 2 1 1 1 3 2 2 3 3 1 2 3 2 2 1 3 2 2 2 1 2 3 2 2 2 1 3 1 2 3 1 2 2 3 2 1 3 2 2 2 2 2 1 3 2 3 2 3 3 2 3`.split(' ').map(Number),
+  quality: `1 3 2 1 2 2 1 3 2 2 3 3 1 2 3 2 1 1 2 1 2 1 1 2 2 2 2 2 2 3 1 1 2 1 1 1 3 2 2 3 1 1 2 2 2 1 3 2 3 1 3 3 1 3`.split(' ').map(Number),
+  featureImportance: [
+
+    ['OD280/OD315 of diluted wines', 17.289768556532511],
+    ['Total phenols', 15.82412355172843],
+    ['Class label', 15.566980447550268],
+    ['Proanthocyanins', 11.022804509831062],
+    ['Hue', 9.1409737222780603],
+    ['Color intensity', 7.5798508442875061],
+    ['Alcalinity of ash', 5.4066026031522769],
+    ['Magnesium', 4.8272731358465615],
+    ['Alcohol', 4.0190193475760578],
+    ['Nonflavanoid phenols', 2.8799547133208443],
+    ['Malic acid', 2.792417716260597],
+    ['Ash', 2.0850987655665629],
+    ['Flavanoids', 1.5651320860692497],
+
+  ],
+  data: WINE_CLASSIFY,
+}
+
+
 @Injectable()
 export class WineService {
 
@@ -58,12 +85,41 @@ export class WineService {
     return this.setupData(wine);
   }
 
+  private splitTestData(WINE) {
+
+    const split = .7 * WINE.data.length;
+
+    const testData = WINE.data.slice(0, split);
+
+
+    const trainData = WINE.data.slice(split);
+
+
+    return {
+      split,
+      testData,
+      trainData,
+    };
+  }
+
   private setupData(wine: string = 'white'): Promise<any> {
 
 
     return new Promise((resolve, reject) => {
 
-      const WINE = wine === 'white' ? whiteWine : redWine;
+
+      let WINE;
+
+      if (wine === 'white') {
+
+        WINE = whiteWine;
+      } else if (wine === 'red') {
+
+        WINE = redWine;
+      } else if (wine === 'classify') {
+
+        WINE = classifiedWine;
+      }
 
       let count: number = 0;
 
@@ -71,16 +127,19 @@ export class WineService {
       const url = `http://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-${wine}.csv`;
 
 
-      const split = .7 * WINE.data.length;
-
-      const testData = WINE.data.slice(0, split);
+      let {split, trainData, testData} = this.splitTestData(WINE);
 
 
-      const trainData = WINE.data.slice(split).map((i, idx) =>
-        Object.assign(i, {quality: Number(i.quality), prediction: Number(WINE.predict[idx])}))
+      if (wine !== 'classify') {
+
+        trainData = this.mapToQuality(trainData, WINE);
+      } else {
+
+        trainData = this.mapToClassifyRegion(trainData, WINE);
+      }
 
 
-      trainData.map((q, i) => {
+      trainData.forEach((q, i) => {
         if (q.prediction === WINE.quality[i]) {
 
           count++;
@@ -98,6 +157,22 @@ export class WineService {
       });
 
     })
+
+
+  }
+
+  private mapToQuality(trainData, WINE) {
+
+    return trainData.map((i, idx) =>
+      Object.assign(i, {quality: Number(i.quality), prediction: Number(WINE.predict[idx])}))
+
+
+  }
+
+  private mapToClassifyRegion(trainData, WINE) {
+
+    return trainData.map((i, idx) =>
+      Object.assign(i, {"Class label": Number(i["Class label"]), prediction: Number(WINE.predict[idx])}))
 
 
   }

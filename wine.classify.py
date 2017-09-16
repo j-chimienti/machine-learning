@@ -18,37 +18,64 @@ from sklearn.ensemble import RandomForestClassifier
 
 SCALER = StandardScaler()
 
-csv = __import__('wine-classify.csv')
+sc = SCALER
 
-wineQualityData = pd.read_csv(csv, header=0, sep=',')
+#############################################################################
+print(50 * '=')
+print('Section: Unsupervised dimensionality reduction'
+      ' via principal component analysis')
+print(50 * '-')
 
-# print(wineQualityData.head())
+df_wine = pd.read_csv('https://archive.ics.uci.edu/ml/'
+                      'machine-learning-databases/wine/wine.data',
+                      header=None)
 
-wine_x = wineQualityData.iloc[:, :-1]
+df_wine.columns = ['Class label', 'Alcohol', 'Malic acid', 'Ash',
+                   'Alcalinity of ash', 'Magnesium', 'Total phenols',
+                   'Flavanoids', 'Nonflavanoid phenols', 'Proanthocyanins',
+                   'Color intensity', 'Hue',
+                   'OD280/OD315 of diluted wines', 'Proline']
 
-# get last col
-wine_y = wineQualityData.iloc[:, -1].values
+# print('Wine data excerpt:\n\n:', df_wine.head())
 
-_num = int(len(wine_x) * 0.7)
 
-wine_x_train = wine_x[:_num]
+X, y = df_wine.iloc[:, 1:].values, df_wine.iloc[:, 0].values
 
-wine_y_train = wine_y[:_num]
+X_train, X_test, y_train, y_test = \
+    train_test_split(X, y, test_size=0.3, random_state=0)
 
-wine_x_test = wine_x[_num:]
+X_train_std = sc.fit_transform(X_train)
+X_test_std = sc.transform(X_test)
 
-wine_y_test = wine_y[_num:]
+cov_mat = np.cov(X_train_std.T)
+eigen_vals, eigen_vecs = np.linalg.eig(cov_mat)
 
-# wine_x_train, wine_y_train, wine_x_test, wine_y_test = train_test_split(wine_x, wine_y, test_size = 0.33)
+# print('\nEigenvalues \n%s' % eigen_vals)
 
-wine_x_train_std = SCALER.fit_transform(wine_x_train)
 
-wine_x_test_std = SCALER.transform(wine_x_test)
+#############################################################################
+
+
+wine_x_train = X_train
+wine_x_test = X_test
+
+
+wine_x_train_std = X_train_std
+wine_x_test_std = X_test_std
+
+wine_y_train = y_train
+wine_y_test = y_test
+
+
 
 
 def LOGREG():
     logReg = linear_model.LogisticRegression(max_iter=1000)
-    logReg.fit(wine_x_train_std, wine_y_train)
+    logReg.fit(wine_x_train, wine_y_train)
+
+    # print('wine_x_train', wine_x_train)
+    #print('wine_x_test', wine_x_test)
+
     print('score', logReg.score(wine_x_test_std, wine_y_test))
 
     bb = logReg.predict(wine_x_test_std)
@@ -57,7 +84,7 @@ def LOGREG():
 
     print('quality', *wine_y_test)
 
-    print('predict_proba', logReg.predict_proba(wine_x_test))
+    #print('predict_proba', logReg.predict_proba(wine_x_test_std))
 
 
 def KNN():
@@ -81,7 +108,7 @@ def FOREST():
 
     importances = forest.feature_importances_
 
-    feat_labels = wineQualityData.columns[:]
+    feat_labels = df_wine.columns
 
     arr = [[feat_labels[i], importances[i] * 100] for i in range(len(importances))]
 
@@ -90,8 +117,12 @@ def FOREST():
     print('feature importance:', *_sorted, sep='\n')
 
 
-# MAKE_SVC()
+KNN()
+
+MAKE_SVC()
+
+
+LOGREG()
+
 
 FOREST()
-
-# LOGREG()

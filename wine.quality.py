@@ -29,80 +29,63 @@ wineQualityData = pd.read_csv(url, header=0, sep=';')
 
 # print(wineQualityData.head())
 
-wine_x = wineQualityData.iloc[:, :-1]
+X = wineQualityData.iloc[:, :-1].values
 
 # get last col
-wine_y = wineQualityData.iloc[:, -1].values
+y = wineQualityData.iloc[:, -1].values
 
-_num = int(len(wine_x) * 0.7)
 
-wine_x_train = wine_x[:_num]
+X_train, X_test, y_train, y_test = \
+  train_test_split(X, y, test_size=0.3, random_state=0)
 
-wine_y_train = wine_y[:_num]
 
-wine_x_test = wine_x[_num:]
+X_train_std = SCALER.fit_transform(X_train)
 
-wine_y_test = wine_y[_num:]
-
-# wine_x_train, wine_y_train, wine_x_test, wine_y_test = train_test_split(wine_x, wine_y, test_size = 0.33)
-
-wine_x_train_std = SCALER.fit_transform(wine_x_train)
-
-wine_x_test_std = SCALER.transform(wine_x_test)
+X_test_std = SCALER.transform(X_test)
 
 
 def LOGREG():
-    logReg = linear_model.LogisticRegression(max_iter=1000)
-    logReg.fit(wine_x_train_std, wine_y_train)
+    logReg = linear_model.LogisticRegression(C = 0.1, penalty = 'l1')
+    logReg.fit(X_train_std, y_train)
 
-    # print('wine_x_train', wine_x_train)
-    #print('wine_x_test', wine_x_test)
-
-    #print('score', logReg.score(wine_x_test_std, wine_y_test))
-
-    bb = logReg.predict(wine_x_test_std)
-
-    print('predict', *bb)
-
-    #print([i for i in wineQualityData])
-
-    #print('quality', *wine_y_test)
-
-    # print('predict_proba', logReg.predict_proba(wine_x_test))
-
+    print('Training accuracy:', logReg.score(X_train_std, y_train))
+    print('Test accuracy:', logReg.score(X_test_std, y_test))
+    print('Intercept:', logReg.intercept_)
+    print('Model weights:', logReg.coef_)
 
 def KNN():
     knn = neighbors.KNeighborsClassifier()
-    knn.fit(wine_x_train, wine_y_train)
-    print('knn score:', knn.score(wine_x_test_std, wine_y_test))
+    knn.fit(X_train, y_train)
+    print('knn score:', knn.score(X_test_std, y_test))
 
 
-# print(knn.predict_proba(wine_x_test))
+# print(knn.predict_proba(X_test))
 
 def MAKE_SVC():
     SVC = svm.SVC()
-    SVC.fit(wine_x_train, wine_y_train)
-    print('svc score', SVC.score(wine_x_test_std, wine_y_test))
+    SVC.fit(X_train, y_train)
+    print('svc score', SVC.score(X_test_std, y_test))
 
 
 def FOREST():
-    forest = RandomForestClassifier(n_estimators=10000, random_state=0, n_jobs=-1)
+    feat_labels = wineQualityData.columns[:-1]
 
-    forest.fit(wine_x_test_std, wine_y_test)
+    forest = RandomForestClassifier(n_estimators=10000,
+                                    random_state=0,
+                                    n_jobs=-1)
 
+    forest.fit(X_train, y_train)
     importances = forest.feature_importances_
 
-    feat_labels = wineQualityData.columns[:]
+    indices = np.argsort(importances)[::-1]
 
-    arr = [[feat_labels[i], importances[i] * 100] for i in range(len(importances))]
-
-    _sorted = sorted(arr, key=lambda i: i[1], reverse=True)
-
-    print('feature importance:', *_sorted, sep='\n')
+    for f in range(X_train.shape[1]):
+        print("%2d) %-*s %f" % (f + 1, 30, feat_labels[indices[f]], importances[indices[f]]))
 
 
 # MAKE_SVC()
 
+LOGREG()
+
 FOREST()
 
-# LOGREG()

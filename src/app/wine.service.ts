@@ -3,12 +3,36 @@ import {Injectable} from '@angular/core';
 
 const whiteWine = {
   accuracy: {
-    test: 0.5,
-    training: 0.5
+    test: 0.521088435374,
+    training: 0.541423570595,
   },
   featureImportance: [
-
+    ['alcohol     ', 0.115958],
+    ['density', 0.103242],
+    ['volatile acidity    ', 0.100965],
+    ['free sulfur dioxide ', 0.096563],
+    ['total sulfur dioxide', 0.090816],
+    ['residual sugar ', 0.086444],
+    ['chlorides   ', 0.085341],
+    ['pH  ', 0.084654],
+    ['citric acid    ', 0.081165],
+    ['sulphates ', 0.080709],
+    ['fixed acidity  ', 0.074144],
   ],
+
+  rawFeatureImportance: ` 
+ 1) alcohol                        0.115958
+ 2) density                        0.103242
+ 3) volatile acidity               0.100965
+ 4) free sulfur dioxide            0.096563
+ 5) total sulfur dioxide           0.090816
+ 6) residual sugar                 0.086444
+ 7) chlorides                      0.085341
+ 8) pH                             0.084654
+ 9) citric acid                    0.081165
+10) sulphates                      0.080709
+11) fixed acidity                  0.074144
+`
 
 };
 
@@ -16,14 +40,36 @@ const whiteWine = {
 const redWine = {
 
   accuracy: {
-    test: 0.5,
-    training: 0.5
+    test: 0.622916666667,
+    training: 0.572832886506,
   },
   featureImportance: [
-
+    [' alcohol        ', 0.139313],
+    [' sulphates ', 0.115662],
+    [' volatile acidity    ', 0.108089],
+    [' total sulfur dioxide', 0.102579],
+    [' density   ', 0.087899],
+    [' chlorides ', 0.078694],
+    [' pH   ', 0.077515],
+    [' fixed acidity  ', 0.075735],
+    [' citric acid    ', 0.075266],
+    [' residual sugar ', 0.071744],
   ],
+  rawFeatureImportance: `
+ 1) alcohol                        0.139313
+ 2) sulphates                      0.115662
+ 3) volatile acidity               0.108089
+ 4) total sulfur dioxide           0.102579
+ 5) density                        0.087899
+ 6) chlorides                      0.078694
+ 7) pH                             0.077515
+ 8) fixed acidity                  0.075735
+ 9) citric acid                    0.075266
+10) residual sugar                 0.071744
+11) free sulfur dioxide            0.067503
+  `
 
-}
+};
 
 
 const classifiedWine = {
@@ -32,22 +78,8 @@ const classifiedWine = {
     test: 0.851851851852,
     training: 0.862903225806,
   },
-  hello:
-    ` 1) Proanthocyanins                0.182483
- 2) OD280/OD315 of diluted wines   0.158610
- 3) Total phenols                  0.150948
- 4) Hue                            0.131987
- 5) Class label                    0.106589
- 6) Color intensity                0.078243
- 7) Magnesium                      0.060718
- 8) Ash                            0.032033
- 9) Alcohol                        0.025400
-10) Nonflavanoid phenols           0.022351
-11) Alcalinity of ash              0.022078
-12) Flavanoids                     0.014645
-13) Malic acid                     0.013916`
-  ,
-  goodImportance: ` 1) Color intensity                0.182483
+  rawFeatureImportance: ` 
+  1) Color intensity                0.182483
  2) Proline                        0.158610
  3) Flavanoids                     0.150948
  4) OD280/OD315 of diluted wines   0.131987
@@ -59,7 +91,8 @@ const classifiedWine = {
 10) Proanthocyanins                0.022351
 11) Magnesium                      0.022078
 12) Nonflavanoid phenols           0.014645
-13) Ash                            0.013916`,
+13) Ash                            0.013916
+`,
   featureImportance: [
     ["Color intensity", 0.182483],
     ["Proline", 0.158610],

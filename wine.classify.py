@@ -98,13 +98,15 @@ def MAKE_SVC():
 
 
 def FOREST():
-  forest = RandomForestClassifier(n_estimators=10000, random_state=0, n_jobs=-1)
+  forest = RandomForestClassifier(n_estimators=10000,
+                                  random_state=0,
+                                  n_jobs=-1)
 
   forest.fit(X_train, y_train)
 
   importances = forest.feature_importances_
 
-  feat_labels = df_wine.columns
+  feat_labels = df_wine.columns[1:]
 
   arr = [[feat_labels[i], importances[i] * 100] for i in range(len(importances))]
 

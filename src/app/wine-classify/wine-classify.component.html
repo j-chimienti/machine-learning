@@ -1,11 +1,13 @@
+<section>
 
-<h1>Wine Classification</h1>
+  <h1>Wine Classification</h1>
 
-<p>
-  178 Wines from 3 different regions are assessed and a machine learning algorithm
-  was applied to the data.
-</p>
+  <p>
+    178 Wines from 3 different regions are assessed and a machine learning algorithm
+    was applied to the data.
+  </p>
 
+</section>
 <app-results
   [accuracy]="WINE.accuracy"
 ></app-results>
@@ -14,3 +16,6 @@
   [featureImportance]="featureImportance"
 ></app-feature-importance>
 
+<app-summary
+  [url]="url"
+></app-summary>

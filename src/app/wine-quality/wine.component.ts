@@ -16,15 +16,12 @@ export class WineComponent implements OnInit {
 
   public featureImportance: any[] = [];
 
-  public testData: Wine[] = [];
 
-  public trainData: Wine[] = [];
-
-  public avg: number = 0;
-
-  public url: string = null;
+  public url: string = 'FIXME';
 
   public loading: boolean = false;
+
+  public WINE : Wine = null;
 
 
   constructor(private wineService: WineService) {
@@ -54,17 +51,9 @@ export class WineComponent implements OnInit {
   private setupData(wine: string = 'white'): void {
 
 
-    this.wineService.getWineData(wine).then(data => {
+    this.WINE = this.wineService.getWineQuality(wine);
 
-      this.avg = data.avg;
-      const {testData, trainData, url, featureImportance} = data;
-
-      this.testData = testData;
-      this.trainData = trainData;
-      this.url = url;
-
-      this.featureImportance = featureImportance;
-    })
+    this.featureImportance = this.WINE.featureImportance;
 
 
   }

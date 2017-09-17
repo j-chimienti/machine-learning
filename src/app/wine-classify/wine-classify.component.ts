@@ -1,12 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {WineService} from "../wine.service";
+import {Wine} from "../wine-quality/WINE";
 
 @Component({
   selector: 'app-wine-classify',
   templateUrl: './wine-classify.component.html',
   styleUrls: ['./wine-classify.component.css']
 })
-
 
 
 export class WineClassifyComponent implements OnInit {
@@ -16,18 +16,16 @@ export class WineClassifyComponent implements OnInit {
 
   public featureImportance: any[] = [];
 
-  public testData: any[] = [];
-
-  public trainData: any[] = [];
-
-  public avg: number = 0;
-
-  public url: string = null;
+  public url: string = 'FIXME';
 
   public loading: boolean = false;
 
+  public WINE : Wine;
+
 
   constructor(private wineService: WineService) {
+
+    this.WINE = this.wineService.redWine;
   }
 
   ngOnInit(): void {
@@ -54,18 +52,9 @@ export class WineClassifyComponent implements OnInit {
   private setupData(wine: string = 'classify'): void {
 
 
-    this.wineService.getWineData(wine).then(data => {
+    this.WINE = this.wineService.getWineQuality(wine);
 
-      this.avg = data.avg;
-      const {testData, trainData, url, featureImportance} = data;
-
-      this.testData = testData;
-      this.trainData = trainData;
-      this.url = url;
-
-      this.featureImportance = featureImportance;
-    })
-
+    this.featureImportance = this.WINE.featureImportance;
 
   }
 

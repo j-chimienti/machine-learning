@@ -1,0 +1,67 @@
+<section>
+
+
+  <h1><a href="#python-machine-learning---supplementary-datasets" id="python-machine-learning---supplementary-datasets">Python
+    Machine Learning - Supplementary Datasets</a></h1>
+  <h2><a href="#iris-flower-dataset" id="iris-flower-dataset">Iris Flower Dataset</a></h2>
+  <p>The Iris dataset for classification.</p>
+
+
+  <p><strong>Features</strong></p>
+  <ol>
+    <li>Sepal length</li>
+    <li>Sepal width</li>
+    <li>Petal length</li>
+    <li>
+      <p>Petal width</p>
+    </li>
+    <li>
+      <p>Number of samples: 150</p>
+    </li>
+    <li>
+      <p>Target variable (discrete): 50x Setosa, 50x Versicolor, 50x Virginica</p>
+    </li>
+  </ol>
+  <h3><a href="#references" id="references">References</a></h3>
+  <ul>
+    <li>Source: <a href="https://archive.ics.uci.edu/ml/datasets/Iris">https://archive.ics.uci.edu/ml/datasets/Iris</a>
+    </li>
+    <li>Bache, K. &amp; Lichman, M. (2013). UCI Machine Learning Repository. Irvine, CA: University of California,
+      School of Information and Computer Science.
+    </li>
+  </ul>
+
+
+  <ul>
+    <li>SVC - accuracy: 97.77 %</li>
+    <li>Logistic Regression - accuracy: 97.77 %</li>
+    <li>KNN - accuracy: 93.33 %</li>
+
+
+  </ul>
+  <h3>SVC data</h3>
+
+  <table>
+    <thead>
+    <tr>
+      <th>Sepal length</th>
+      <th>Sepal width</th>
+      <th>Petal length</th>
+      <th>Class</th>
+      <th>Prediction</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let d of svcData">
+      <td>{{d[0]}}</td>
+      <td>{{d[1]}}</td>
+      <td>{{d[2]}}</td>
+      <td>{{d[3]}}</td>
+      <td>{{d[4]}}</td>
+    </tr>
+    </tbody>
+  </table>
+
+
+
+</section>

@@ -13,6 +13,9 @@ import { SummaryComponent } from './summary/summary.component';
 import { ResultsComponent } from './results/results.component';
 import { NavLinksComponent } from './nav-links/nav-links.component';
 import { FeatureImportanceComponent } from './feature-importance/feature-importance.component';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { IrisComponent } from './iris/iris.component';
+import { BostonHousingComponent } from './boston-housing/boston-housing.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +26,9 @@ import { FeatureImportanceComponent } from './feature-importance/feature-importa
     ResultsComponent,
     NavLinksComponent,
     FeatureImportanceComponent,
+    WelcomeComponent,
+    IrisComponent,
+    BostonHousingComponent,
 
   ],
   imports: [

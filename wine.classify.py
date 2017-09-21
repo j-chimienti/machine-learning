@@ -18,13 +18,12 @@ from sklearn.ensemble import RandomForestClassifier
 
 SCALER = StandardScaler()
 
-sc = SCALER
-
 #############################################################################
 print(50 * '=')
 print('Section: Unsupervised dimensionality reduction'
       ' via principal component analysis')
 print(50 * '-')
+
 
 df_wine = pd.read_csv('https://archive.ics.uci.edu/'
                       'ml/machine-learning-databases/wine/wine.data',
@@ -36,9 +35,9 @@ df_wine.columns = ['Class label', 'Alcohol', 'Malic acid', 'Ash',
                    'Color intensity', 'Hue', 'OD280/OD315 of diluted wines',
                    'Proline']
 
-print('Class labels', np.unique(df_wine['Class label']))
+# print('Class labels', np.unique(df_wine['Class label']))
 
-print('\nWine data excerpt:\n\n', df_wine.head())
+# print('\nWine data excerpt:\n\n', df_wine.head())
 
 X, y = df_wine.iloc[:, 1:].values, df_wine.iloc[:, 0].values
 
@@ -53,48 +52,32 @@ X_test_std = stdsc.transform(X_test)
 
 ########
 
-wine_x_train = X_train
-wine_x_test = X_test
-
-wine_x_train_std = X_train_std
-wine_x_test_std = X_test_std
-
-wine_y_train = y_train
-wine_y_test = y_test
-
 
 def LOGREG():
-  # blank score = 0.65
-  lr = linear_model.LogisticRegression(C=0.1, penalty='l1')
-  lr.fit(wine_x_train, wine_y_train)
+  lr = linear_model.LogisticRegression()
+  lr.fit(X_train, y_train)
 
-  print('Training accuracy:', lr.score(X_train_std, y_train))
-  print('Test accuracy:', lr.score(X_test_std, y_test))
-  # print('Intercept:', lr.intercept_)
-  # print('Model weights:', lr.coef_)
+  # print('Training accuracy:', lr.score(X_train_std, y_train))
+  print('log reg score:', lr.score(X_test_std, y_test))
 
-  print('predictions', lr.predict(X_test_std))
+  # print('predictions', lr.predict(X_test_std))
 
-  print('actual', y_test)
+  # print('actual', y_test)
 
 
-
-
-  # print('predict_proba', logReg.predict_proba(wine_x_test_std))
 
 
 def KNN():
   knn = neighbors.KNeighborsClassifier()
-  knn.fit(wine_x_train, wine_y_train)
-  print('knn score:', knn.score(wine_x_test_std, wine_y_test))
+  knn.fit(X_train, y_train)
+  print('knn score:', knn.score(X_test_std, y_test))
 
 
-# print(knn.predict_proba(wine_x_test))
 
-def MAKE_SVC():
+def _SVC_():
   SVC = svm.SVC()
-  SVC.fit(wine_x_train, wine_y_train)
-  print('svc score', SVC.score(wine_x_test_std, wine_y_test))
+  SVC.fit(X_train, y_train)
+  print('svc score', SVC.score(X_test_std, y_test))
 
 
 def FOREST():
@@ -108,10 +91,6 @@ def FOREST():
 
   feat_labels = df_wine.columns[1:]
 
-  arr = [[feat_labels[i], importances[i] * 100] for i in range(len(importances))]
-
-  _sorted = sorted(arr, key=lambda i: i[1], reverse=True)
-
   indices = np.argsort(importances)[::-1]
 
   for f in range(X_train.shape[1]):
@@ -120,10 +99,17 @@ def FOREST():
                             importances[indices[f]]))
 
 
-# KNN()
+def LINEAR_SVC_():
+  SVC = svm.LinearSVC()
+  SVC.fit(X_train, y_train)
+  print('linear svc score', SVC.score(X_test_std, y_test))
 
-# MAKE_SVC()
 
+KNN()
+
+_SVC_()
+
+LINEAR_SVC_()
 
 LOGREG()
 

@@ -1,29 +1,49 @@
 <!-- Navigation -->
 <nav class="navbar navbar-light sticky-top bg-faded">
+
   <a class="navbar-brand" href="#">AI Playground</a>
-  <span>
-        <button
-          (click)="wine = 'red'"
-          class="btn btn-danger"
-          [disabled]="wine === 'red'"
-        >red wine
+
+  <div ngbDropdown class="d-inline-block">
+    <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Classification</button>
+    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+
+      <button
+        (click)="wine = 'iris'"
+        class="btn btn-default dropdown-item"
+        [disabled]="wine === 'iris'"
+      >Classify Flower Species
       </button>
 
 
+      <button (click)="wine = 'classify'"
+              class="btn btn-default dropdown-item"
+              [disabled]="wine === 'classify'"
+      >Classify Wine Origin
+      </button>
+
+      <div class="dropdown-divider"></div>
+
+      <h5>Predicting Wine Quality</h5>
+
       <button (click)="wine = 'white'"
-              class="btn btn-default"
+              class="btn btn-default dropdown-item"
               [disabled]="wine === 'white'"
       >white wine
       </button>
 
-    <button (click)="wine = 'classify'"
-            class="btn btn-default"
-            [disabled]="wine === 'classify'"
-    >predict wine origin
+
+      <button
+        (click)="wine = 'red'"
+        class="btn btn-danger dropdown-item"
+        [disabled]="wine === 'red'"
+      >red wine
       </button>
 
+      <button class="dropdown-item">Something else is here</button>
+    </div>
+  </div>
 
-      </span>
+
 </nav>
 
 
@@ -47,6 +67,10 @@
         *ngIf="wine !== 'classify'"
         [wine]="wine"
       ></app-wine>
+
+      <app-iris
+        *ngIf="wine === 'iris'"
+      ></app-iris>
     </div>
     <div class="col-sm-2">
     </div>

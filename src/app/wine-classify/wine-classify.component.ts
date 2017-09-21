@@ -14,11 +14,8 @@ export class WineClassifyComponent implements OnInit {
 
   @Input('wine') wine: string;
 
-  public featureImportance: any[] = [];
 
   public url: string = 'FIXME';
-
-  public loading: boolean = false;
 
   public WINE : Wine;
 
@@ -31,22 +28,14 @@ export class WineClassifyComponent implements OnInit {
   ngOnInit(): void {
 
 
-    this.loading = true;
-
 
     this.setupData(this.wine);
-
-    this.loading = false;
 
   }
 
   ngOnChanges(): void {
 
-    this.loading = true;
-
     this.setupData(this.wine);
-
-    this.loading = false;
   }
 
   private setupData(wine: string = 'classify'): void {
@@ -54,7 +43,6 @@ export class WineClassifyComponent implements OnInit {
 
     this.WINE = this.wineService.getWineQuality(wine);
 
-    this.featureImportance = this.WINE.featureImportance;
 
   }
 

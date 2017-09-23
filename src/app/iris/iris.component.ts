@@ -8,6 +8,12 @@ import {Component, OnInit} from '@angular/core';
 export class IrisComponent implements OnInit {
 
 
+  classNames = {
+    0: 'Iris-setosa',
+    1: 'Iris-versicolor',
+    2: 'Iris-virginica',
+  }
+
   KNeighbors = {
     accuracy: 0.9777777777777777,
 

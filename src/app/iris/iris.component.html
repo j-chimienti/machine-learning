@@ -1,11 +1,54 @@
-<section>
+<section id="results">
 
 
-  <h1><a href="#python-machine-learning---supplementary-datasets" id="python-machine-learning---supplementary-datasets">Python
-    Machine Learning - Supplementary Datasets</a></h1>
-  <h2><a href="#iris-flower-dataset" id="iris-flower-dataset">Iris Flower Dataset</a></h2>
+  <h2>Iris Flower Dataset -
+    <small>classification results</small>
+  </h2>
+
+  <table class="table table-responsive table-bordered table-striped">
+    <thead>
+    <tr>
+      <th class="text-right">Sepal length</th>
+      <th class="text-right">Sepal width</th>
+      <th class="text-right">Petal length</th>
+      <th class="text-right">Petal width</th>
+      <th class="text-right">Class</th>
+      <th class="text-right">Prediction</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let d of svcData.predictions">
+      <td class="text-right">{{d[0]}}</td>
+      <td class="text-right">{{d[1]}}</td>
+      <td class="text-right">{{d[2]}}</td>
+      <td class="text-right">{{d[3]}}</td>
+      <td class="text-right">{{classNames[d[4]] }}</td>
+      <td
+        class="alert text-right"
+        [class.alert-success]="d[4] === d[5]"
+        [class.alert-danger]="d[4] !== d[5]"
+      >{{classNames[d[5]]}}
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+
+</section>
+
+
+<section id="summary">
+  <h2>Iris flower dataset</h2>
   <p>The Iris dataset for classification.</p>
 
+
+  <ul>
+    <li>SVC - accuracy: 97.77 %</li>
+    <li>Logistic Regression - accuracy: 97.77 %</li>
+    <li>KNN - accuracy: 93.33 %</li>
+
+
+  </ul>
 
   <p><strong>Features</strong></p>
   <ol>
@@ -30,38 +73,6 @@
       School of Information and Computer Science.
     </li>
   </ul>
-
-
-  <ul>
-    <li>SVC - accuracy: 97.77 %</li>
-    <li>Logistic Regression - accuracy: 97.77 %</li>
-    <li>KNN - accuracy: 93.33 %</li>
-
-
-  </ul>
-  <h3>SVC data</h3>
-
-  <table>
-    <thead>
-    <tr>
-      <th>Sepal length</th>
-      <th>Sepal width</th>
-      <th>Petal length</th>
-      <th>Class</th>
-      <th>Prediction</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let d of svcData">
-      <td>{{d[0]}}</td>
-      <td>{{d[1]}}</td>
-      <td>{{d[2]}}</td>
-      <td>{{d[3]}}</td>
-      <td>{{d[4]}}</td>
-    </tr>
-    </tbody>
-  </table>
-
 
 
 </section>

@@ -1,54 +1,62 @@
 <!-- Navigation -->
-<nav class="navbar navbar-light sticky-top bg-faded">
-
-  <a class="navbar-brand" href="#">AI Playground</a>
-
-  <div ngbDropdown class="d-inline-block">
-    <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Classification</button>
-    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-
-      <button
-        (click)="wine = 'iris'"
-        class="btn btn-default dropdown-item"
-        [disabled]="wine === 'iris'"
-      >Classify Flower Species
-      </button>
-
-
-      <button (click)="wine = 'classify'"
-              class="btn btn-default dropdown-item"
-              [disabled]="wine === 'classify'"
-      >Classify Wine Origin
-      </button>
-
-      <div class="dropdown-divider"></div>
-
-      <h5>Predicting Wine Quality</h5>
-
-      <button (click)="wine = 'white'"
-              class="btn btn-default dropdown-item"
-              [disabled]="wine === 'white'"
-      >white wine
-      </button>
-
-
-      <button
-        (click)="wine = 'red'"
-        class="btn btn-danger dropdown-item"
-        [disabled]="wine === 'red'"
-      >red wine
-      </button>
-
-      <button class="dropdown-item">Something else is here</button>
-    </div>
-  </div>
-
-
-</nav>
 
 
 <div
   class="container-fluid">
+  <nav class="navbar navbar-light sticky-top bg-faded">
+
+    <a class="navbar-brand" href="#">AI Playground</a>
+
+    <div ngbDropdown class="d-inline-block">
+      <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Classification</button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+
+        <li class="dropdown-item">
+          <button
+            (click)="wine = 'iris'"
+            class="btn btn-default"
+            [disabled]="wine === 'iris'"
+          >Classify Flower Species
+          </button>
+        </li>
+
+
+        <li class="dropdown-item">
+          <button (click)="wine = 'classify'"
+                  class="btn btn-default"
+                  [disabled]="wine === 'classify'"
+          >Classify Wine Origin
+          </button>
+        </li>
+
+        <div class="dropdown-divider"></div>
+
+        <li class="dropdown-header">Predicting Wine Quality</li>
+        <li class="dropdown-item">
+          <button (click)="wine = 'white'"
+                  class="btn btn-default"
+                  [disabled]="wine === 'white'"
+          >white wine
+          </button>
+
+        </li>
+
+        <li class="dropdown-item">
+          <button
+            (click)="wine = 'red'"
+            class="btn btn-default"
+            [disabled]="wine === 'red'"
+          >red wine
+          </button>
+        </li>
+
+
+      </div>
+    </div>
+
+
+  </nav>
+
 
   <div class="row">
     <div class="col-sm-2">
@@ -64,12 +72,13 @@
       ></app-wine-classify>
 
       <app-wine
-        *ngIf="wine !== 'classify'"
+        *ngIf="wine === 'red' || wine === 'white'"
         [wine]="wine"
       ></app-wine>
 
       <app-iris
         *ngIf="wine === 'iris'"
+
       ></app-iris>
     </div>
     <div class="col-sm-2">

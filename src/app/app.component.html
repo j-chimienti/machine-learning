@@ -3,86 +3,157 @@
 
 <div
   class="container-fluid">
-  <nav class="navbar navbar-light sticky-top bg-faded">
+  <nav class="navbar navbar-light bg-faded">
 
-    <a class="navbar-brand" href="#">AI Playground</a>
+    <a class="navbar-brand" href="#"
+       (click)="wine = ''"
+    >Machine Learning</a>
 
-    <div ngbDropdown class="d-inline-block">
-      <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Classification</button>
-      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+    <a
+      class="btn btn-primary text-white"
+      (click)="wine = ''"
+      *ngIf="wine !== ''"><i class="fa fa-home"></i> Home</a>
 
-        <li class="dropdown-item">
-          <button
-            (click)="wine = 'iris'"
-            class="btn btn-default"
-            [disabled]="wine === 'iris'"
-          >Classify Flower Species
-          </button>
-        </li>
+  </nav>
+
+  <div
+    *ngIf="wine === ''"
+  >
 
 
-        <li class="dropdown-item">
-          <button (click)="wine = 'classify'"
-                  class="btn btn-default"
-                  [disabled]="wine === 'classify'"
-          >Classify Wine Origin
-          </button>
-        </li>
+    <!-- Project One -->
+    <div class="row">
+      <div class="col-md-7 text-center">
+        <img
+          class="img-fluid rounded"
+          src="http://www.quiettime.org/wp-content/uploads/2016/07/CEM_5411_960x640c-700x300.jpg"
+          alt=""
+        />
+      </div>
+      <div class="col-md-5">
+        <h3>Iris Plant Classification</h3>
+        <p>The best known database to be found in the pattern recognition literature. The data
+          set contains 3 classes of 50 instances each, where each class refers
+          to a type of iris plant. One class is linearly separable from the other
+          two; the latter are not linearly separable from each other.</p>
+        <button
+          class="btn btn-primary text-capitalize text-white"
+          (click)="wine = 'iris'"
+        >
+          view project
 
-        <div class="dropdown-divider"></div>
-
-        <li class="dropdown-header">Predicting Wine Quality</li>
-        <li class="dropdown-item">
-          <button (click)="wine = 'white'"
-                  class="btn btn-default"
-                  [disabled]="wine === 'white'"
-          >white wine
-          </button>
-
-        </li>
-
-        <li class="dropdown-item">
-          <button
-            (click)="wine = 'red'"
-            class="btn btn-default"
-            [disabled]="wine === 'red'"
-          >red wine
-          </button>
-        </li>
-
+        </button>
 
       </div>
     </div>
 
+    <!-- Project One -->
+    <div class="row">
+      <div class="col-md-7 text-center">
+        <img class="img-fluid rounded"
+             src="https://e-vmi.com/img/pics/EarthTWO700x300.jpg"
+             alt="">
 
-  </nav>
 
+      </div>
+      <div class="col-md-5">
+        <h3>Classify Wine Origin</h3>
 
-  <div class="row">
-    <div class="col-sm-2">
-      <app-nav-links></app-nav-links>
+        <p></p>
+        <button
+          class="btn btn-primary text-capitalize text-white"
+          (click)="wine = 'classify'"
+
+        >
+          view project
+
+        </button>
+
+      </div>
     </div>
 
-    <div class="col-sm-8">
+    <!-- Project One -->
+    <div class="row">
+      <div class="col-md-7">
+        <a href="#">
+          <img class="img-fluid rounded mb-3 mb-md-0"
+               width="700"
+               height="300"
+               src="http://www.gla.ac.uk/media/media_525911_en.jpg"
+               alt="">
+        </a>
+      </div>
+      <div class="col-md-5">
+        <h3>Classify White Wine Quality</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum
+          at
+          voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet
+          unde.</p>
+        <button
+          class="btn btn-primary text-capitalize text-white"
+          (click)="wine = 'white'"
+
+        >
+
+          view project
 
 
-      <app-wine-classify
-        *ngIf="wine === 'classify'"
-        [wine]="'classify'"
-      ></app-wine-classify>
+        </button>
 
-      <app-wine
-        *ngIf="wine === 'red' || wine === 'white'"
-        [wine]="wine"
-      ></app-wine>
-
-      <app-iris
-        *ngIf="wine === 'iris'"
-
-      ></app-iris>
+      </div>
     </div>
-    <div class="col-sm-2">
+
+    <!-- Project One -->
+    <div class="row">
+      <div class="col-md-7">
+        <a href="#">
+          <img class="img-fluid rounded mb-3 mb-md-0"
+               src="http://www.theclubti.com/wp-content/uploads/2015/11/Wine-Dinner-700x300.jpg" alt="">
+        </a>
+      </div>
+      <div class="col-md-5">
+        <h3>Classify Red Wine Quality</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum
+          at
+          voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet
+          unde.</p>
+        <button
+          class="btn btn-primary text-capitalize text-white"
+          (click)="wine = 'red'"
+
+        >
+          view project
+
+
+        </button>
+
+      </div>
     </div>
+
   </div>
 
+
+  <app-wine-classify
+    *ngIf="wine === 'classify'"
+    [wine]="'classify'"
+  ></app-wine-classify>
+
+  <app-wine
+    *ngIf="wine === 'red' || wine === 'white'"
+    [wine]="wine"
+  ></app-wine>
+
+  <app-iris
+    *ngIf="wine === 'iris'"
+
+  ></app-iris>
 </div>
+
+
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+  <div class="container">
+    <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+  </div>
+  <!-- /.container -->
+</footer>

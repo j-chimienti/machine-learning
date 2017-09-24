@@ -33,6 +33,11 @@ X = iris.data
 y = iris.target
 
 
+columns = [
+  'Sepal length', 'Sepal width', "Petal length", "Petal width"
+]
+
+
 '''
 np.random.seed(0)
 indices = np.random.permutation(len(X))
@@ -53,12 +58,12 @@ _estimator = KNeighborsClassifier()
 
 _estimator.fit(X_train, y_train)
 
-a = _estimator.predict(X_test)
+pred_knn = _estimator.predict(X_test)
 
 acc = 0
 
-for _ in range(len(a)):
-  if (a[_] == y_test[_]):
+for _ in range(len(pred_knn)):
+  if (pred_knn[_] == y_test[_]):
     acc += 1
 
 print('K Neighbors Accuracy', acc / len(y_test))
@@ -95,15 +100,38 @@ c3 = 0
 
 arr = []
 
-for _ in range(len(svc_prediction)):
-  if (svc_prediction[_] == y_test[_]):
+for _ in range(len(pred_knn)):
+  if (pred_knn[_] == y_test[_]):
     c3 += 1
 
-  arr.append([*X_test[_], y_test[_], svc_prediction[_]])
+  arr.append([*X_test[_], y_test[_], pred_knn[_]])
 
 print('accuracy Linear SVC: ', c3 / len(svc_prediction))
 
 # print(X_test, y_test)
 
-print(*arr, sep = '\n')
+print('knn accuracy', *arr, sep = '\n')
+
+
+
+def FOREST():
+  forest = RandomForestClassifier(n_estimators=10000,
+                                  random_state=0,
+                                  n_jobs=-1)
+
+  forest.fit(X_train, y_train)
+
+  importances = forest.feature_importances_
+
+  feat_labels = columns
+
+  indices = np.argsort(importances)[::-1]
+
+  for f in range(X_train.shape[1]):
+    print("%2d) %-*s %f" % (f + 1, 30,
+                            feat_labels[indices[f]],
+                            importances[indices[f]]))
+
+
+FOREST()
 

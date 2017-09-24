@@ -1,21 +1,62 @@
-<section>
+<app-nav-links></app-nav-links>
+
+<section id="summary">
 
   <h1>Wine Classification</h1>
 
   <p>
-    178 Wines from 3 different regions are assessed and a machine learning algorithm
-    was applied to the data.
+    178 Wines from 3 different regions.
   </p>
 
 </section>
-<app-results
-  [accuracy]="WINE.accuracy"
-></app-results>
+
+<section>
+
+  <h3 id="results">Results</h3>
+
+  <ul class="list-group">
+    <li class="list-group-item">
+      Accuracy SVC:
+      {{WINE.accuracy.test * 100 | number }} %
+      <div class="col-xs-3">
+      </div>
+    </li>
+  </ul>
+
+  <div class="table-fixed">
+
+    <table class="table table-responsive table-bordered table-striped">
+      <thead>
+      <tr>
+        <td class="text-capitalize text-right">{{WINE.columns[13]}}</td>
+        <td class="text-capitalize text-right">{{WINE.columns[14]}}</td>
+        <td class="text-capitalize text-right">{{WINE.columns[0]}} (%)</td>
+        <td class="text-capitalize text-right">
+          {{WINE.columns[9]}}
+        </td>
+        <td class="text-capitalize text-right">{{WINE.columns[12]}}</td>
+        <td class="text-capitalize text-right">{{WINE.columns[6]}}</td>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let d of WINE.predictions">
+        <td class="text-capitalize text-right">{{d[13] | number }}</td>
+        <td class="text-capitalize text-right"
+            [class.alert-success]="d[13] === d[14]"
+            [class.alert-danger]="d[13] !== d[14]"
+        >{{d[14] | number }}
+        </td>
+        <td class="text-capitalize text-right">{{d[9] | number }}</td>
+        <td class="text-capitalize text-right">{{d[0] | number }}</td>
+        <td class="text-capitalize text-right">{{d[12] | number }}</td>
+        <td class="text-capitalize text-right">{{d[6] | number }}</td>
+
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
 
 <app-feature-importance
   [featureImportance]="WINE.featureImportance"
 ></app-feature-importance>
-
-<app-summary
-  [url]="url"
-></app-summary>

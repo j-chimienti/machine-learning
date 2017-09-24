@@ -1,46 +1,7 @@
-<section id="results">
-
-
-  <h2>Iris Flower Dataset -
-    <small>classification results</small>
-  </h2>
-
-  <table class="table table-responsive table-bordered table-striped">
-    <thead>
-    <tr>
-      <th class="text-right">Sepal length</th>
-      <th class="text-right">Sepal width</th>
-      <th class="text-right">Petal length</th>
-      <th class="text-right">Petal width</th>
-      <th class="text-right">Class</th>
-      <th class="text-right">Prediction</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let d of svcData.predictions">
-      <td class="text-right">{{d[0]}}</td>
-      <td class="text-right">{{d[1]}}</td>
-      <td class="text-right">{{d[2]}}</td>
-      <td class="text-right">{{d[3]}}</td>
-      <td class="text-right">{{classNames[d[4]] }}</td>
-      <td
-        class="alert text-right"
-        [class.alert-success]="d[4] === d[5]"
-        [class.alert-danger]="d[4] !== d[5]"
-      >{{classNames[d[5]]}}
-      </td>
-    </tr>
-    </tbody>
-  </table>
-
-
-</section>
-
+<app-nav-links></app-nav-links>
 
 <section id="summary">
   <h2>Iris flower dataset</h2>
-  <p>The Iris dataset for classification.</p>
-
   <p>
     Fisher’s Iris data base (Fisher, 1936) is perhaps the best known
     database to be found in the pattern recognition literature. The data
@@ -49,14 +10,6 @@
     two; the latter are not linearly separable from each other.
   </p>
 
-
-  <ul>
-    <li>SVC - accuracy: 97.77 %</li>
-    <li>Logistic Regression - accuracy: 97.77 %</li>
-    <li>KNN - accuracy: 93.33 %</li>
-
-
-  </ul>
 
   <p><strong>Features</strong></p>
   <ol>
@@ -73,7 +26,104 @@
       <p>Target variable (discrete): 50x Setosa, 50x Versicolor, 50x Virginica</p>
     </li>
   </ol>
-  <h3><a href="#references" id="references">References</a></h3>
+
+</section>
+
+<section>
+
+  <h3 id="results">Results</h3>
+
+  <ul class="list-group">
+    <li class="list-group-item">
+      SVC:
+      {{svcData.accuracy * 100 | number }} %
+      <div class="col-xs-3">
+        <button class="btn btn-primary"
+                (click)="activeData = svcData.predictions"
+                [disabled]="activeData === svcData.predictions"
+        >
+          view results
+        </button>
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="col-xs-9">
+        <div class="col-xs-9">
+          Logistic Regression
+        </div>
+        <div class="col-xs-3">
+          {{LogisticRegression.accuracy * 100 | number }} %
+        </div>
+      </div>
+      <div class="col-xs-3">
+        <button class="btn btn-primary"
+                (click)="activeData = LogisticRegression.predictions"
+                [disabled]="activeData === LogisticRegression.predictions"
+        >
+          view results
+        </button>
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="col-xs-9">
+        <div class="col-xs-9">
+          KNN
+        </div>
+        <div class="col-xs-3">
+          {{KNeighbors.accuracy * 100 | number }} %
+        </div>
+      </div>
+      <div class="col-xs-3">
+        <button class="btn btn-primary"
+                (click)="activeData = KNeighbors.predictions"
+                [disabled]="activeData === KNeighbors.predictions"
+        >
+          view results
+        </button>
+      </div>
+    </li>
+
+
+  </ul>
+  <div style="max-height: 400px; overflow-y: auto">
+    <table class="table table-responsive table-bordered table-striped">
+      <thead>
+      <tr>
+        <th class="text-right">Sepal length</th>
+        <th class="text-right">Sepal width</th>
+        <th class="text-right">Petal length</th>
+        <th class="text-right">Petal width</th>
+        <th class="text-right">Class</th>
+        <th class="text-right">Prediction</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let d of activeData">
+        <td class="text-right">{{d[0]}}</td>
+        <td class="text-right">{{d[1]}}</td>
+        <td class="text-right">{{d[2]}}</td>
+        <td class="text-right">{{d[3]}}</td>
+        <td class="text-right">{{classNames[d[4]] }}</td>
+        <td
+          class="alert text-right"
+          [class.alert-success]="d[4] === d[5]"
+          [class.alert-danger]="d[4] !== d[5]"
+        >{{classNames[d[5]]}}
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+</section>
+
+<app-feature-importance
+  [featureImportance]="featureImportance"
+></app-feature-importance>
+
+<section id="references">
+  <h3>References</h3>
   <ul>
     <li>Source: <a href="https://archive.ics.uci.edu/ml/datasets/Iris">https://archive.ics.uci.edu/ml/datasets/Iris</a>
     </li>
@@ -81,6 +131,4 @@
       School of Information and Computer Science.
     </li>
   </ul>
-
-
 </section>

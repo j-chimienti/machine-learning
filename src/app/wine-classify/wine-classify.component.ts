@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {WineService} from "../wine.service";
-import {Wine} from "../wine-quality/WINE";
 
 @Component({
   selector: 'app-wine-classify',
@@ -15,14 +14,12 @@ export class WineClassifyComponent implements OnInit {
   @Input('wine') wine: string;
 
 
-  public url: string = 'FIXME';
-
-  public WINE : Wine;
+  public WINE : any;
 
 
   constructor(private wineService: WineService) {
 
-    this.WINE = this.wineService.redWine;
+    this.WINE = this.wineService.classifiedWine;
   }
 
   ngOnInit(): void {

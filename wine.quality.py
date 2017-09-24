@@ -55,7 +55,7 @@ def LOGREG():
 
 def KNN():
     knn = neighbors.KNeighborsClassifier()
-    knn.fit(X_train, y_train)
+    knn.fit(X_train_std, y_train)
     print('knn score:', knn.score(X_test_std, y_test))
 
 
@@ -63,7 +63,7 @@ def KNN():
 
 def MAKE_SVC():
     SVC = svm.SVC()
-    SVC.fit(X_train, y_train)
+    SVC.fit(X_train_std, y_train)
     print('svc score', SVC.score(X_test_std, y_test))
 
 
@@ -83,7 +83,10 @@ def FOREST():
         print("%2d) %-*s %f" % (f + 1, 30, feat_labels[indices[f]], importances[indices[f]]))
 
 
-# MAKE_SVC()
+
+KNN()
+
+MAKE_SVC()
 
 LOGREG()
 

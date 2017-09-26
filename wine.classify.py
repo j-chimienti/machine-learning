@@ -100,7 +100,7 @@ def _SVC_():
   SVC.fit(X_train_std, y_train)
   print('svc score', SVC.score(X_test_std, y_test))
 
-  printer(SVC.predict(X_test_std))
+  # printer(SVC.predict(X_test_std))
 
 
 def FOREST():
@@ -127,14 +127,10 @@ def LINEAR_SVC_():
   SVC.fit(X_train_std, y_train)
   print('linear svc score', SVC.score(X_test_std, y_test))
 
+  printer(SVC.predict(X_test_std))
 
-KNN()
-
-_SVC_()
 
 LINEAR_SVC_()
-
-LOGREG()
 
 # FOREST()
 

@@ -61,8 +61,8 @@ def KNN():
 
 # print(knn.predict_proba(X_test))
 
-def MAKE_SVC():
-    SVC = svm.SVC()
+def LINEAR_SVC_():
+    SVC = svm.LinearSVC()
     SVC.fit(X_train_std, y_train)
     print('svc score', SVC.score(X_test_std, y_test))
 
@@ -84,11 +84,11 @@ def FOREST():
 
 
 
-KNN()
+# KNN()
 
-MAKE_SVC()
+LINEAR_SVC_()
 
-LOGREG()
+# LOGREG()
 
-FOREST()
+# FOREST()
 

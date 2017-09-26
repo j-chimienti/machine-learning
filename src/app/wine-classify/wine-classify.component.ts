@@ -14,7 +14,7 @@ export class WineClassifyComponent implements OnInit {
   @Input('wine') wine: string;
 
 
-  public WINE : any;
+  public WINE: any;
 
 
   constructor(private wineService: WineService) {
@@ -23,7 +23,6 @@ export class WineClassifyComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
 
 
     this.setupData(this.wine);

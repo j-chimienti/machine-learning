@@ -28,6 +28,7 @@
     "core-js": "^2.4.1",
     "csv": "^1.1.1",
     "gh-pages": "^1.0.0",
+    "json-to-es-bulk": "0.0.1",
     "lodash": "^4.17.4",
     "machine_learning": "^0.1.1",
     "markdown": "^0.5.0",

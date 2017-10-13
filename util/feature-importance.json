@@ -1,0 +1,70 @@
+const arr  = [
+  {
+    "name": "Color Intensity",
+    "value_": 18.248,
+    "id": 0
+  },
+  {
+    "name": "Proline",
+    "value_": 15.861,
+    "id": 0
+  },
+  {
+    "name": "Flavanoids",
+    "value_": 15.095,
+    "id": 0
+  },
+  {
+    "name": "OD280/OD315 Of Diluted Wines",
+    "value_": 13.199,
+    "id": 0
+  },
+  {
+    "name": "Alcohol",
+    "value_": 10.659,
+    "id": 0
+  },
+  {
+    "name": "Hue",
+    "value_": 7.824,
+    "id": 0
+  },
+  {
+    "name": "Total Phenols",
+    "value_": 6.072,
+    "id": 0
+  },
+  {
+    "name": "Alcalinity Of Ash",
+    "value_": 3.203,
+    "id": 0
+  },
+  {
+    "name": "Malic Acid",
+    "value_": 2.54,
+    "id": 0
+  },
+  {
+    "name": "Proanthocyanins",
+    "value_": 2.235,
+    "id": 0
+  },
+  {
+    "name": "Magnesium",
+    "value_": 2.208,
+    "id": 0
+  },
+  {
+    "name": "Nonflavanoid Phenols",
+    "value_": 1.465,
+    "id": 0
+  },
+  {
+    "name": "Ash",
+    "value_": 1.392,
+    "id": 0
+  }
+];
+
+
+

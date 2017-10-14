@@ -8,39 +8,22 @@ import {WineService} from "../wine.service";
 })
 
 
-export class WineClassifyComponent implements OnInit {
+export class WineClassifyComponent implements OnInit{
 
 
-  @Input('wine') wine: string;
-
-
-  public WINE: any;
+  public WINE: any = null;
 
 
   constructor(private wineService: WineService) {
 
+
+  }
+
+  ngOnInit() {
+
     this.WINE = this.wineService.classifiedWine;
   }
 
-  ngOnInit(): void {
-
-
-    this.setupData(this.wine);
-
-  }
-
-  ngOnChanges(): void {
-
-    this.setupData(this.wine);
-  }
-
-  private setupData(wine: string = 'classify'): void {
-
-
-    this.WINE = this.wineService.getWineQuality(wine);
-
-
-  }
 
 
 }

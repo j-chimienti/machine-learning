@@ -35,18 +35,7 @@
     <h3 id="results">Results</h3>
 
     <ul class="list-group">
-      <li class="list-group-item">
-        SVC:
-        {{svcData.accuracy * 100 | number }} %
-        <div class="col-xs-3">
-          <button class="btn btn-primary"
-                  (click)="activeData = svcData.predictions"
-                  [disabled]="activeData === svcData.predictions"
-          >
-            view results
-          </button>
-        </div>
-      </li>
+
       <li class="list-group-item">
         <div class="col-xs-9">
           <div class="col-xs-9">
@@ -54,36 +43,11 @@
           </div>
           <div class="col-xs-3">
             {{LogisticRegression.accuracy * 100 | number }} %
-          </div>
-        </div>
-        <div class="col-xs-3">
-          <button class="btn btn-primary"
-                  (click)="activeData = LogisticRegression.predictions"
-                  [disabled]="activeData === LogisticRegression.predictions"
-          >
-            view results
-          </button>
-        </div>
-      </li>
-      <li class="list-group-item">
-        <div class="col-xs-9">
-          <div class="col-xs-9">
-            KNN
-          </div>
-          <div class="col-xs-3">
-            {{KNeighbors.accuracy * 100 | number }} %
-          </div>
-        </div>
-        <div class="col-xs-3">
-          <button class="btn btn-primary"
-                  (click)="activeData = KNeighbors.predictions"
-                  [disabled]="activeData === KNeighbors.predictions"
-          >
-            view results
-          </button>
-        </div>
-      </li>
 
+            Accuracy
+          </div>
+        </div>
+      </li>
 
     </ul>
     <div style="max-height: 400px; overflow-y: auto">

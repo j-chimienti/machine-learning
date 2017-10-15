@@ -1,19 +1,19 @@
 <div class="container">
-  <section>
-
-    <h1>
+  <h1>
      <span class="text-capitalize">
-      {{wine}}
+      {{color}}
     </span>
 
-      Wine Quality</h1>
+    Wine Quality</h1>
 
-    <p>
-      Wines w/ quality rankings are assessed and a machine learning algorithm
-      was applied to the data.
-    </p>
 
-  </section>
+
+  <h3 id="summary">Summary</h3>
+
+  <p>
+    Wines w/ quality rankings are assessed and a machine learning algorithm
+    was applied to the data.
+  </p>
 
   <div class="container">
 
@@ -24,12 +24,9 @@
   </div>
 
   <app-feature-importance
-    [featureImportance]="featureImportance"
+    [featureImportance]="WINE.featureImportance"
   ></app-feature-importance>
 
 
-  <section id="summary">
-    <h3>Add summary</h3>
-  </section>
 
 </div>

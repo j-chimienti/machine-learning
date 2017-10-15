@@ -1,4 +1,4 @@
-import {Accuracy} from "../results/Accuracy";
+import {Accuracy} from "../wine-classify/results/Accuracy";
 
 export class Wine {
 

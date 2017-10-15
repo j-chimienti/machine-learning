@@ -9,7 +9,7 @@ import {CommonModule} from "@angular/common";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {WineService} from "./wine.service";
 import {WineClassifyComponent} from './wine-classify/wine-classify.component';
-import {ResultsComponent} from './results/results.component';
+import {ResultsComponent} from './wine-classify/results/results.component';
 import {NavLinksComponent} from './nav-links/nav-links.component';
 import {FeatureImportanceComponent} from './wine-classify/feature-importance/feature-importance.component';
 import {WelcomeComponent} from './welcome/welcome.component';

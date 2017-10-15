@@ -1,8 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Wine} from "./WINE";
 
 import {WineService} from "../wine.service";
-
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-wine',
@@ -12,51 +12,22 @@ import {WineService} from "../wine.service";
 export class WineComponent implements OnInit {
 
 
-  @Input('wine') wine: string;
+  public WINE: any;
 
-  public featureImportance: any[] = [];
-
-
-  public url: string = 'FIXME';
-
-  public loading: boolean = false;
-
-  public WINE : Wine = null;
+  public color: string;
 
 
-  constructor(private wineService: WineService) {
+  constructor(private wineService: WineService, private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
 
 
-    this.loading = true;
+    this.color = this.route.snapshot.params['color'];
 
-
-    this.setupData(this.wine);
-
-    this.loading = false;
-
-  }
-
-  ngOnChanges(): void {
-
-    this.loading = true;
-
-    this.setupData(this.wine);
-
-    this.loading = false;
-  }
-
-  private setupData(wine: string = 'white'): void {
-
-
-    this.WINE = this.wineService.getWineQuality(wine);
-
-    this.featureImportance = this.WINE.featureImportance;
+    this.WINE = this.wineService.getWineQuality(this.color);
 
 
   }
-
 
 }

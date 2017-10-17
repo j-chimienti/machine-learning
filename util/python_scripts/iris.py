@@ -16,15 +16,8 @@ from itertools import combinations
 
 from sklearn.ensemble import RandomForestClassifier
 
-
 # Create and fit a nearest-neighbor classifier
 from sklearn.neighbors import KNeighborsClassifier
-
-#############################################################################
-print(50 * '=')
-print('Section: Unsupervised dimensionality reduction'
-      ' via principal component analysis')
-print(50 * '-')
 
 iris = datasets.load_iris()
 
@@ -32,63 +25,14 @@ X = iris.data
 
 y = iris.target
 
-
 columns = [
   'Sepal length', 'Sepal width', "Petal length", "Petal width"
 ]
 
-
-'''
-np.random.seed(0)
-indices = np.random.permutation(len(X))
-X_train = X[indices[:-10]]
-y_train = y[indices[:-10]]
-X_test  = X[indices[-10:]]
-y_test  = y[indices[-10:]]
-
-'''
-
-
 X_train, X_test, y_train, y_test = \
   train_test_split(X, y, test_size=0.3, random_state=0)
 
-
-
-_estimator = KNeighborsClassifier()
-
-_estimator.fit(X_train, y_train)
-
-pred_knn = _estimator.predict(X_test)
-
-acc = 0
-
-for _ in range(len(pred_knn)):
-  if (pred_knn[_] == y_test[_]):
-    acc += 1
-
-print('K Neighbors Accuracy', acc / len(y_test))
-
-
-
-
-logistic = linear_model.LogisticRegression(C= 1e5)
-
-logistic.fit(X_train, y_train)
-
-pred2 = logistic.predict(X_test)
-
-c2 = 0
-
-for _ in range(len(pred2)):
-  if (pred2[_] == y_test[_]):
-    c2 += 1
-
-print('Logistic Regression Accuracy: ', c2 / len(pred2))
-
-
-
-
-print('pred log Reg', pred2)
+# Classifiers
 
 svc = svm.LinearSVC()
 
@@ -96,44 +40,46 @@ svc.fit(X_train, y_train)
 
 svc_prediction = svc.predict(X_test)
 
-c3 = 0
+KNN = KNeighborsClassifier()
 
-arr = []
+KNN.fit(X_train, y_train)
 
-for _ in range(len(pred_knn)):
-  if (pred_knn[_] == y_test[_]):
-    c3 += 1
+knn_prediction = KNN.predict(X_test)
 
-  arr.append([*X_test[_], y_test[_], pred_knn[_]])
+logistic = linear_model.LogisticRegression(C=1e5)
 
-print('accuracy Linear SVC: ', c3 / len(svc_prediction))
+logistic.fit(X_train, y_train)
 
-# print(X_test, y_test)
-
-print('knn accuracy', *arr, sep = '\n')
+logistic_predictions = logistic.predict(X_test)
 
 
+def accuracy(predictions, observations):
+  num_ = 0
 
-def FOREST():
-  forest = RandomForestClassifier(n_estimators=10000,
-                                  random_state=0,
-                                  n_jobs=-1)
+  for _ in range(len(predictions)):
 
-  forest.fit(X_train, y_train)
+    if (predictions[_] == observations[_]):
+      num_ += 1
 
-  importances = forest.feature_importances_
-
-  feat_labels = columns
-
-  indices = np.argsort(importances)[::-1]
-
-  for f in range(X_train.shape[1]):
-    print("%2d) %-*s %f" % (f + 1, 30,
-                            feat_labels[indices[f]],
-                            importances[indices[f]]))
+  return num_ / len(predictions)
 
 
-# FOREST()
+logistic_accuracy = accuracy(logistic_predictions, y_test)
 
-KNN
+svc_accuracy = accuracy(svc_prediction, y_test)
 
+knn_accuracy = accuracy(knn_prediction, y_test)
+
+print('### Classification accuracy comparison')
+
+print('This table compares the results of the 3 algorithms that were used to classify'
+      ' wine data.'
+      )
+
+print('KNN | Logistic Regression | Linear SVC')
+
+print('--- | ------------------- | --------- |')
+
+# print('%.4f | %.4f | %.4f' % logistic_accuracy, knn_accuracy, svc_accuracy)
+
+print('{} | {} | {}'.format(logistic_accuracy, svc_accuracy, knn_accuracy))

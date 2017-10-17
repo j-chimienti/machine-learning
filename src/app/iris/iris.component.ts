@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
-interface stuff {
+interface DATER {
   accuracy: number;
   predictions: number[][];
 }
@@ -26,7 +26,7 @@ export class IrisComponent implements OnInit {
     ['Sepal width ', 0.025838],
   ]
 
-  LogisticRegression: stuff = {
+  LogisticRegression: DATER = {
     accuracy: 0.9777777777777777,
     predictions: [
       [5.7999999999999998, 2.7999999999999998, 5.0999999999999996, 2.3999999999999999, 2, 2],

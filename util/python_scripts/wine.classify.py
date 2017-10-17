@@ -56,6 +56,9 @@ def LOGREG():
   lr = linear_model.LogisticRegression()
   lr.fit(X_train_std, y_train)
 
+
+  print('## Logistic Regression')
+
   # print('Training accuracy:', lr.score(X_train_std, y_train))
   print('log reg score:', lr.score(X_test_std, y_test))
 
@@ -88,6 +91,8 @@ def printer(predictionArray):
 def KNN():
   knn = neighbors.KNeighborsClassifier()
   knn.fit(X_train_std, y_train)
+
+  print('## KNN')
   print('knn score:', knn.score(X_test_std, y_test))
 
   # printer(knn.predict(X_test))
@@ -97,6 +102,7 @@ def KNN():
 def _SVC_():
   SVC = svm.SVC()
   SVC.fit(X_train_std, y_train)
+  print('## SVC')
   print('svc score', SVC.score(X_test_std, y_test))
 
   # printer(SVC.predict(X_test_std))
@@ -124,6 +130,7 @@ def FOREST():
 def LINEAR_SVC_():
   SVC = svm.LinearSVC()
   SVC.fit(X_train_std, y_train)
+  print('## Linear SVC')
   print('linear svc score', SVC.score(X_test_std, y_test))
 
   printer(SVC.predict(X_test_std))

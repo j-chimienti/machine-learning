@@ -17,12 +17,6 @@ from sklearn.ensemble import RandomForestClassifier
 
 SCALER = StandardScaler()
 
-#############################################################################
-print(50 * '=')
-print('Section: Unsupervised dimensionality reduction'
-      ' via principal component analysis')
-print(50 * '-')
-
 
 df_wine = pd.read_csv('https://archive.ics.uci.edu/'
                       'ml/machine-learning-databases/wine/wine.data',

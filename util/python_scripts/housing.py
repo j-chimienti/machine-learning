@@ -16,6 +16,10 @@ from itertools import combinations
 
 from sklearn.ensemble import RandomForestClassifier
 
+
+from sklearn.metrics import r2_score
+from sklearn.metrics import mean_squared_error
+
 housing = datasets.load_boston()
 
 
@@ -58,8 +62,6 @@ print('slope %.3f' % slr.coef_[0])
 print('Intercept: %.3f' % slr.intercept_)
 
 
-from sklearn.metrics import r2_score
-from sklearn.metrics import mean_squared_error
 
 print('MSE train: %.3f, test: %.3f' % (
         mean_squared_error(y_train, y_train_pred),

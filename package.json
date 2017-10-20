@@ -1,6 +1,6 @@
 {
   "name": "thewinequalityapp",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "MIT",
   "scripts": {
     "predeploy": "npm run buildGithub",
@@ -11,7 +11,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "buildGithub": "ng build --prod --output-path docs --base-href https://jchimienti89.github.io/classification/"
+    "buildGithub": "ng build --prod --output-path docs --base-href https://jchimienti89.github.io/machine-learning/"
   },
   "private": true,
   "dependencies": {

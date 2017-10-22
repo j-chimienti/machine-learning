@@ -1,10 +1,10 @@
-
 from sklearn import datasets
 
 from classify import Classify
 
 import pandas as pd
 
+import numpy as np
 
 iris = datasets.load_iris()
 
@@ -22,6 +22,12 @@ Dataframe.columns = columns
 
 X_ = Dataframe.iloc[::].values
 
-classifier = Classify(X_, y, types = ['KNN', 'svc', 'log'])
+print('')
+
+print('# Iris')
+
+print('')
+
+classifier = Classify(X_, y, standardizeData=False, columns = columns)
 
 

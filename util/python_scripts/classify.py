@@ -1,5 +1,3 @@
-import numpy as np
-
 from sklearn.ensemble import RandomForestClassifier
 
 from sklearn import neighbors, linear_model, preprocessing, svm
@@ -8,7 +6,11 @@ from sklearn.model_selection import train_test_split
 
 from sklearn.preprocessing import StandardScaler
 
-import sys
+import numpy as np
+
+from halo import Halo
+
+spinner = Halo(text = "Calculating Feature Importance", spinner = 'dots')
 
 SCALER = StandardScaler()
 
@@ -20,11 +22,27 @@ logistic = linear_model.LogisticRegression(C=1e5)
 
 
 class Classify():
-  def __init__(self, X, y, standardizeData = False, types=['KNN', 'svc', 'log']):
+  '''
+
+
+    @param X Array<any>
+    @param y Array<String>
+    @param columns Array<String>
+
+
+  '''
+
+  def __init__(self, X, y, standardizeData=False, types=['KNN', 'svc', 'log'], columns = None):
 
     self.forest = RandomForestClassifier(n_estimators=10000,
                                          random_state=0,
                                          n_jobs=-1)
+
+    self.importances = None
+
+    self.columns = columns
+
+    self.standardizeData = standardizeData
 
     classifiers = {}
     classifiers['KNN'] = KNN
@@ -66,24 +84,30 @@ class Classify():
 
     self.scores = scores
 
-    self.main(X, y, types, standardizeData)
+    self.main(X, y, types)
 
-  def main(self, X, y, types, standardizeData):
+  def main(self, X, y, types):
+
     self.splitTestData(X, y)
 
-    if standardizeData:
-      self.standardizeData()
+    if self.standardizeData:
+      self.standardize()
 
     for _ in range(len(types)):
       type = types[_]
 
-      self.fitAndPredict(type, standardizeData)
+      self.fitAndPredict(type)
 
       self.scores[type] = self.score(type)
 
     self.printComparison()
 
-    return self.scores
+    self.run_forest()
+
+    if self.columns:
+      self.print_feature_importances()
+
+    # return self.scores
 
   def splitTestData(self, X, y):
     X_train, X_test, y_train, y_test = \
@@ -103,16 +127,17 @@ class Classify():
   def score(self, type):
     classifier = self.classifiers[type]
 
-    return classifier.score(self.X_test, self.y_test)
+    x_test = self.X_test if not self.standardizeData else self.X_test_std
 
+    return classifier.score(x_test, self.y_test)
 
-  def fitAndPredict(self, type, standardizeData):
+  def fitAndPredict(self, type):
 
-    assert(type)
+    assert (type)
 
-    x_train = self.X_train if not standardizeData else self.X_train_std
+    x_train = self.X_train if not self.standardizeData else self.X_train_std
 
-    x_test = self.X_test if not standardizeData else self.X_test_std
+    x_test = self.X_test if not self.standardizeData else self.X_test_std
 
     y = self.y_train
 
@@ -136,46 +161,57 @@ class Classify():
 
   def printComparison(self):
 
-    print('### Classification accuracy comparison')
+    print('### Classifier Juxtaposition')
 
-    print('This table compares the results of the 3 algorithms that were used to classify'
-          ' wine data.'
-          )
+    print('')
 
     print('KNN | Logistic Regression | Linear SVC')
 
     print('--- | ------------------- | --------- |')
 
-
-
     # print('% .4f' % self.scores['KNN'])
 
 
-    print(' {} | {} | {}'.format(self.scores['KNN'], self.scores['log'], self.scores['svc']))
+    print(' {:f} | {:f} | {:f}'.format(self.scores['KNN'], self.scores['log'], self.scores['svc']))
 
-
-
-  def standardizeData(self):
-
-
+  def standardize(self):
 
     self.X_train_std = SCALER.fit_transform(self.X_train)
 
     self.X_test_std = SCALER.transform(self.X_test)
 
-  def FOREST(self):
+  def run_forest(self):
+
+    spinner.start()
+
+
+    print('')
+
 
     self.forest.fit(self.X_train, self.y_train)
 
-    importances = self.forest.feature_importances_
+    spinner.stop()
 
-    #  feat_labels = df_wine.columns[1:]
+    return True
 
-    # indices = np.argsort(importances)[::-1]
+  def print_feature_importances(self):
 
-    for f in range(self.X_train.shape[1]):
-      print(f)
+    feature_importances_ = self.forest.feature_importances_
 
-      # print("%2d) %-*s %f" % (f + 1, 30,
-      #                      feat_labels[indices[f]],
-      #                      importances[indices[f]]))
+    sortedFeatures = np.argsort(feature_importances_)[::-1]
+
+    print('')
+
+    print('*Feature Importance*')
+
+    print(' | Feature | Importance')
+
+    print('--- | -------- | ---------')
+
+    num = 0
+
+    for i in sortedFeatures:
+      num += 1
+      print('{} | {} | {:f}'.format(num, self.columns[i], float(feature_importances_[i])))
+
+    print('')

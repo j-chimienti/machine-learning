@@ -1,11 +1,8 @@
 import pandas as pd
 
-
 from classify import Classify
 
 import sys
-
-
 
 whiteWineUrl = 'http://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-white.csv'
 
@@ -22,5 +19,9 @@ X = wineQualityData.iloc[:, :-1].values
 # get last col
 y = wineQualityData.iloc[:, -1].values
 
-classifier_ = Classify(X,y, standardizeData = False)
+print('')
+print('# Wine Quality')
 
+print('')
+
+classifier_ = Classify(X, y, standardizeData=True)

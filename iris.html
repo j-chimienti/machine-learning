@@ -1,0 +1,162 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Machine Learning</title>
+  <base href="/">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+        integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <style>
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+
+    body {
+      font-family: 'Muli', 'Helvetica', 'Arial', 'sans-serif';
+    }
+
+    section {
+      min-height: 80vh;
+    }
+
+    .table-fixed {
+      max-height: 400px;
+      overflow-y: scroll;
+    }
+
+  </style>
+
+
+</head>
+<body>
+
+<div>
+  <ul>
+    <li>
+
+      <a  class="text-capitalize" href="#summary">summary</a>
+    </li>
+    <li><a  class="text-capitalize"  href="#results">results</a></li>
+    <li><a  class="text-capitalize"  href="#featureImportance">feature Importance</a></li>
+    <li><a  class="text-capitalize"  href="#references">references</a></li>
+  </ul>
+</div>, <section id="summary">
+    <h2>Iris flower dataset</h2>
+    <p>
+      Fisher’s Iris data base (Fisher, 1936) is perhaps the best known
+      database to be found in the pattern recognition literature. The data
+      set contains 3 classes of 50 instances each, where each class refers
+      to a type of iris plant. One class is linearly separable from the other
+      two; the latter are not linearly separable from each other.
+    </p>
+
+
+    <p><strong>Features</strong></p>
+    <ol>
+      <li>Sepal length</li>
+      <li>Sepal width</li>
+      <li>Petal length</li>
+      <li>
+        <p>Petal width</p>
+      </li>
+      <li>
+        <p>Number of samples: 150</p>
+      </li>
+      <li>
+        <p>Target variable (discrete): 50x Setosa, 50x Versicolor, 50x Virginica</p>
+      </li>
+    </ol>
+
+  </section>,<pre><code>### Results
+</code></pre><table>
+<thead>
+<tr>
+<th>KNN</th>
+<th>Logistic Regression</th>
+<th>Linear SVC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> 0.977778</td>
+<td>0.977778</td>
+<td>0.933333</td>
+</tr>
+</tbody>
+</table>
+<p><em>Feature Importance</em></p>
+<table>
+<thead>
+<tr>
+<th>num</th>
+<th>Feature</th>
+<th>Importance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Petal length</td>
+<td>0.458107</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Petal width</td>
+<td>0.408683</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Sepal length</td>
+<td>0.107372</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Sepal width</td>
+<td>0.025838</td>
+</tr>
+</tbody>
+</table>
+, <section id="references">
+    <h3>References</h3>
+    <ul>
+      <li>Source: <a
+        href="https://archive.ics.uci.edu/ml/datasets/Iris">https://archive.ics.uci.edu/ml/datasets/Iris</a>
+      </li>
+      <li>Bache, K. &amp; Lichman, M. (2013). UCI Machine Learning Repository. Irvine, CA: University of California,
+        School of Information and Computer Science.
+      </li>
+    </ul>
+  </section>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-108469762-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-108469762-1');
+</script>
+
+
+
+</body>
+</html>
+

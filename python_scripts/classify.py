@@ -10,7 +10,7 @@ import numpy as np
 
 from halo import Halo
 
-spinner = Halo(text = "Calculating Feature Importance", spinner = 'dots')
+spinner = Halo(text="Calculating Feature Importance", spinner='dots')
 
 SCALER = StandardScaler()
 
@@ -32,7 +32,7 @@ class Classify():
 
   '''
 
-  def __init__(self, X, y, standardizeData=False, types=['KNN', 'svc', 'log'], columns = None):
+  def __init__(self, X, y, standardizeData=False, types=['KNN', 'svc', 'log'], columns=None):
 
     self.forest = RandomForestClassifier(n_estimators=10000,
                                          random_state=0,
@@ -107,7 +107,7 @@ class Classify():
     if self.columns:
       self.print_feature_importances()
 
-    # return self.scores
+      # return self.scores
 
   def splitTestData(self, X, y):
     X_train, X_test, y_train, y_test = \
@@ -183,10 +183,6 @@ class Classify():
   def run_forest(self):
 
     spinner.start()
-
-
-    print('')
-
 
     self.forest.fit(self.X_train, self.y_train)
 

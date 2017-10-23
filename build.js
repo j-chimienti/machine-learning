@@ -3,20 +3,10 @@ const marked = require('marked');
 const fs = require('fs');
 
 
-const navLinks = `<div>
-  <ul>
-    <li>
-
-      <a  class="text-capitalize" href="#summary">summary</a>
-    </li>
-    <li><a  class="text-capitalize"  href="#results">results</a></li>
-    <li><a  class="text-capitalize"  href="#featureImportance">feature Importance</a></li>
-    <li><a  class="text-capitalize"  href="#references">references</a></li>
-  </ul>
-</div>`;
+const {header, footer, navLinks} = require('./assets/templates');
 
 const iris = {
-  references: ` <section id="references">
+    references: ` <section id="references">
     <h3>References</h3>
     <ul>
       <li>Source: <a
@@ -29,12 +19,12 @@ const iris = {
   </section>
 `,
 
-  classNames: {
-    0: 'Iris-setosa',
-    1: 'Iris-versicolor',
-    2: 'Iris-virginica',
-  },
-  summary: ` <section id="summary">
+    classNames: {
+        0: 'Iris-setosa',
+        1: 'Iris-versicolor',
+        2: 'Iris-virginica',
+    },
+    summary: ` <section id="summary">
     <h2>Iris flower dataset</h2>
     <p>
       Fisher’s Iris data base (Fisher, 1936) is perhaps the best known
@@ -63,8 +53,8 @@ const iris = {
 
   </section>`,
 
-  results: marked(
-    `
+    results: marked(
+        `
     ### Results
 
 KNN | Logistic Regression | Linear SVC
@@ -81,14 +71,14 @@ num | Feature | Importance
 4 | Sepal width | 0.025838
 
     `
-  ),
+    ),
 
 
 };
 
 
 const wineClassify = {
-  summary: `
+    summary: `
 
   <h3 id="summary">Summary</h3>
   <p>
@@ -105,7 +95,7 @@ const wineClassify = {
   </p>
 
 `,
-  references: `<section>
+    references: `<section>
     <h3><a href="#references" id="references">References</a></h3>
     <ul>
       <li>Forina, M. et al, PARVUS -
@@ -122,8 +112,8 @@ const wineClassify = {
     </ul>
 
   </section>`,
-  results: marked(
-`
+    results: marked(
+        `
 ### Results
 
 KNN | Logistic Regression | Linear SVC
@@ -149,8 +139,8 @@ num | Feature | Importance
 13 | Malic acid | 0.013916
 
 `
-  ),
-  images: `
+    ),
+    images: `
    <div class="text-center">
     <img src="./assets/images/alcohol.png" class="img-fluid rounded img-thumbnail"/>
   </div>
@@ -176,16 +166,16 @@ const summary = marked(`
   `);
 
 const references = marked(
-  `
+    `
     ### References
   `
 );
 
 const wineQuality = {
-  summary,
-  red: {
     summary,
-    results: marked(`
+    red: {
+        summary,
+        results: marked(`
       
 
 ### Results
@@ -212,12 +202,12 @@ num | Feature | Importance
 
 
     `),
-    references,
-  },
-  white: {
-    summary,
-    results: marked(
-`
+        references,
+    },
+    white: {
+        summary,
+        results: marked(
+            `
 
 ### Results
 
@@ -243,92 +233,38 @@ num | Feature | Importance
 
 
 `
-    ),
-    references,
-  }
+        ),
+        references,
+    }
 }
 
 
 const html = (...body) => `
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Machine Learning</title>
-  <base href="/">
-
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-
-  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
-
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
-        integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-  <style>
-    html,
-    body {
-      width: 100%;
-      height: 100%;
-    }
-
-    body {
-      font-family: 'Muli', 'Helvetica', 'Arial', 'sans-serif';
-    }
-
-    section {
-      min-height: 80vh;
-    }
-
-    .table-fixed {
-      max-height: 400px;
-      overflow-y: scroll;
-    }
-
-  </style>
-
-
-</head>
-<body>
-
+${header}
 ${body}
-
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-108469762-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-108469762-1');
-</script>
+${footer}
+`;
 
 
+// BUILD THE PAGES
 
-</body>
-</html>
+const irisBod = [navLinks('iris.html'), iris.summary, iris.results, iris.references];
+const wineClassifyBody = [navLinks('wine-classify.html'), wineClassify.summary, wineClassify.results, wineClassify.images, wineClassify.references];
 
-`
-
-const irisBod = [navLinks, iris.summary, iris.results, iris.references];
-const wineClassifyBody = [navLinks, wineClassify.summary, wineClassify.results, wineClassify.images, wineClassify.references];
-
-const wineQualityRedBod = [navLinks, wineQuality.red.summary, wineQuality.red.results, wineQuality.red.references];
-const wineQualityWhiteBod = [navLinks, wineQuality.white.summary, wineQuality.white.results, wineQuality.white.references];
+const wineQualityRedBod = [navLinks('wine-quality-red.html'), wineQuality.red.summary, wineQuality.red.results, wineQuality.red.references];
+const wineQualityWhiteBod = [navLinks('wine-quality-red.html'), wineQuality.white.summary, wineQuality.white.results, wineQuality.white.references];
 
 return Promise.all([
-  fs.writeFile('./iris.html', html(irisBod), () => {}),
-  fs.writeFile('./wine-classify.html', html(wineClassifyBody), () => {}),
-  fs.writeFile('./wine-quality-red.html', html(wineQualityRedBod), () => {}),
-  fs.writeFile('./wine-quality-white.html', html(wineQualityWhiteBod), () => {}),
+    fs.writeFile('./iris.html', html(irisBod), () => {
+    }),
+    fs.writeFile('./wine-classify.html', html(wineClassifyBody), () => {
+    }),
+    fs.writeFile('./wine-quality-red.html', html(wineQualityRedBod), () => {
+    }),
+    fs.writeFile('./wine-quality-white.html', html(wineQualityWhiteBod), () => {
+    }),
 
 ]).then(() => console.log('done'))
-  .catch(console.error)
+    .catch(console.error)
 
 

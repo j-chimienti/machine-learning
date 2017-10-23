@@ -67,9 +67,9 @@ const navLinks = (path = 'iris.html') => `<div>
 
       <a  class="text-capitalize" href="https://jchimienti89.github.io/machine-learning/${path}#summary">summary</a>
     </li>
-    <li><a  class="text-capitalize"  href="https://jchimienti89.github.io/machine-learning/${path}#results">results</a></li>
-    <li><a  class="text-capitalize"  href="https://jchimienti89.github.io/machine-learning/${path}#featureImportance">feature Importance</a></li>
-    <li><a  class="text-capitalize"  href="https://jchimienti89.github.io/machine-learning/${path}#references">references</a></li>
+    <li><a  class="text-capitalize js-scroll-trigger"  href="https://jchimienti89.github.io/machine-learning/${path}#results">results</a></li>
+    <li><a  class="text-capitalize js-scroll-trigger"  href="https://jchimienti89.github.io/machine-learning/${path}#featureImportance">feature Importance</a></li>
+    <li><a  class="text-capitalize js-scroll-trigger"  href="https://jchimienti89.github.io/machine-learning/${path}#references">references</a></li>
   </ul>
 </div>`;
 

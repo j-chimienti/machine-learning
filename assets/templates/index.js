@@ -21,21 +21,16 @@ const header = `
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <style>
-        html,
-        body {
-            width: 100%;
-            height: 100%;
-        }
-
+      
+        
         body {
             font-family: 'Muli', 'Helvetica', 'Arial', 'sans-serif';
+            background: whitesmoke;
+            margin-top: 5vh;
         }
+        
 
-        .table-fixed {
-            max-height: 400px;
-            overflow-y: scroll;
-        }
-
+  
     </style>
 
 

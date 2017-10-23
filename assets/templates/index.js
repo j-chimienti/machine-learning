@@ -31,10 +31,6 @@ const header = `
             font-family: 'Muli', 'Helvetica', 'Arial', 'sans-serif';
         }
 
-        section {
-            min-height: 80vh;
-        }
-
         .table-fixed {
             max-height: 400px;
             overflow-y: scroll;
@@ -59,6 +55,17 @@ const footer = `
 
 </body>
 </html>
+`;
+
+const navBar = `
+<nav>
+    <a 
+        href="https://jchimienti89.github.io/machine-learning"
+    class="btn btn-default pull-right">
+        <i class="fa fa-home"></i>
+        </a>
+</button>
+</nav>
 `
 
 const navLinks = (path = 'iris.html') => `<div>
@@ -68,13 +75,13 @@ const navLinks = (path = 'iris.html') => `<div>
       <a  class="text-capitalize" href="https://jchimienti89.github.io/machine-learning/${path}#summary">summary</a>
     </li>
     <li><a  class="text-capitalize js-scroll-trigger"  href="https://jchimienti89.github.io/machine-learning/${path}#results">results</a></li>
-    <li><a  class="text-capitalize js-scroll-trigger"  href="https://jchimienti89.github.io/machine-learning/${path}#featureImportance">feature Importance</a></li>
     <li><a  class="text-capitalize js-scroll-trigger"  href="https://jchimienti89.github.io/machine-learning/${path}#references">references</a></li>
   </ul>
 </div>`;
 
 module.exports = {
     header,
+    navBar,
     footer,
     navLinks,
 };

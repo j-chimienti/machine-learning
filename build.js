@@ -3,7 +3,7 @@ const marked = require('marked');
 const fs = require('fs');
 
 
-const {header, footer, navLinks} = require('./assets/templates');
+const {navBar, header, footer, navLinks} = require('./assets/templates');
 
 const iris = {
     references: ` <section id="references">
@@ -25,7 +25,9 @@ const iris = {
         2: 'Iris-virginica',
     },
     summary: ` <section id="summary">
-    <h2>Iris flower dataset</h2>
+    <h1>Iris flower dataset</h1>
+    
+    <h3>Summary</h3>
     <p>
       Fisher’s Iris data base (Fisher, 1936) is perhaps the best known
       database to be found in the pattern recognition literature. The data
@@ -53,9 +55,8 @@ const iris = {
 
   </section>`,
 
-    results: marked(
-        `
-    ### Results
+    results: marked(`
+### Results
 
 KNN | Logistic Regression | Linear SVC
 --- | ------------------- | --------- |
@@ -69,9 +70,7 @@ num | Feature | Importance
 2 | Petal width | 0.408683
 3 | Sepal length | 0.107372
 4 | Sepal width | 0.025838
-
-    `
-    ),
+`),
 
 
 };
@@ -241,7 +240,10 @@ num | Feature | Importance
 
 const html = (...body) => `
 ${header}
+${navBar}
+<div class="container">
 ${body}
+</div>
 ${footer}
 `;
 

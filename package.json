@@ -1,5 +1,6 @@
 {
-  "name": "thewinequalityapp",
+  "name": "machine-learning",
+  "author": "joe chimienti",
   "version": "0.1.0",
   "license": "MIT",
   "scripts": {
@@ -9,7 +10,6 @@
   "private": false,
   "dependencies": {},
   "devDependencies": {
-    "gh-pages": "^1.0.0",
     "marked": "^0.3.6"
   }
 }

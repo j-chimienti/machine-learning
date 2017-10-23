@@ -159,16 +159,14 @@ num | Feature | Importance
 
 const summary = marked(`
   
-    ### Summary
-    
-    *fixme*
-  `);
+### Summary
 
-const references = marked(
-    `
-    ### References
-  `
-);
+*fixme*
+`);
+
+const references = marked(`
+### References
+`);
 
 const wineQuality = {
     summary,

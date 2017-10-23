@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "license": "MIT",
   "scripts": {
-    "deploy": "gh-pages",
+    "deploy": "git add . && git commit -m 'build' && git push origin master",
     "build": "node build.js"
   },
   "private": false,

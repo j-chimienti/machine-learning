@@ -161,11 +161,14 @@ const summary = marked(`
   
 ### Summary
 
-*fixme*
+ Due to privacy and logistic issues, only physicochemical (inputs) and sensory (the output) variables are available (e.g. there is no data about grape types, wine brand, wine selling price, etc.). 
+
 `);
 
 const references = marked(`
 ### References
+
+1. http://archive.ics.uci.edu/ml/datasets/Wine+Quality
 `);
 
 const wineQuality = {

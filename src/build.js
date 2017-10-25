@@ -1,9 +1,11 @@
 const marked = require('marked');
 
+
+
 const fs = require('fs');
 
 
-const {navBar, header, footer, navLinks} = require('./assets/templates');
+const {navBar, header, footer, navLinks} = require('./htmlTemplates/index');
 
 const iris = {
     references: ` <section id="references">
@@ -25,7 +27,7 @@ const iris = {
         2: 'Iris-virginica',
     },
     summary: ` <section id="summary">
-    <h1>Iris flower dataset</h1>
+    <h1>Iris Plant Species</h1>
     
     <h3>Summary</h3>
     <p>
@@ -56,20 +58,21 @@ const iris = {
   </section>`,
 
     results: marked(`
+    
 ### Results
 
-KNN | Logistic Regression | Linear SVC
---- | ------------------- | --------- |
- 0.977778 | 0.977778 | 0.933333
+KNN            | Logistic Reg         | Linear SVC
+-------------: | -------------------: | ---------: 
+ 0.977778      | 0.977778             | 0.933333
 
 *Feature Importance*
 
-num | Feature | Importance
---- | -------- | ---------
-1 | Petal length | 0.458107
-2 | Petal width | 0.408683
-3 | Sepal length | 0.107372
-4 | Sepal width | 0.025838
+Rank   | Feature          | Importance
+---    | --------         | ---------:
+1      | Petal length     | 0.458107
+2      | Petal width      | 0.408683
+3      | Sepal length     | 0.107372
+4      | Sepal width      | 0.025838
 `),
 
 
@@ -115,13 +118,13 @@ const wineClassify = {
         `
 ### Results
 
-KNN | Logistic Regression | Linear SVC
+KNN | Logistic Reg        | Linear SVC
 --- | ------------------- | --------- |
- 1.000000 | 1.000000 | 1.000000
+ 1.00 | 1.00 | 1.00
 
 *Feature Importance*
 
-num | Feature | Importance
+Rank | Feature | Importance
 --- | -------- | ---------
 1 | Proanthocyanins | 0.182483
 2 | OD280/OD315 of diluted wines | 0.158610
@@ -141,19 +144,19 @@ num | Feature | Importance
     ),
     images: `
    <div class="text-center">
-    <img src="./assets/images/alcohol.png" class="img-fluid rounded img-thumbnail"/>
+    <img src="../assets/images/alcohol.png" class="img-fluid rounded img-thumbnail"/>
   </div>
 
   <div class="text-center">
-    <img src="./assets/images/colorIntensity.png" class="img-fluid rounded img-thumbnail"/>
+    <img src="../assets/images/colorIntensity.png" class="img-fluid rounded img-thumbnail"/>
   </div>
 
   <div class="text-center">
-    <img src="./assets/images/flavonoids.png" class="img-fluid rounded img-thumbnail"/>
+    <img src="../assets/images/flavonoids.png" class="img-fluid rounded img-thumbnail"/>
   </div>
 
   <div class="text-center">
-    <img src="./assets/images/proline.png" class="img-fluid rounded img-thumbnail"/>
+    <img src="../assets/images/proline.png" class="img-fluid rounded img-thumbnail"/>
   </div>`,
 }
 

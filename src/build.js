@@ -1,7 +1,6 @@
 const marked = require('marked');
 
 
-
 const fs = require('fs');
 
 
@@ -112,6 +111,9 @@ const wineClassify = {
   </section>`,
     results: marked(`
 ### Results
+
+Three classification techniques were applied to the data.
+The accuracy rates are listed below.
 
 KNN | Logistic Reg        | Linear SVC
 --- | ------------------- | --------- |

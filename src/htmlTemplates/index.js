@@ -56,7 +56,7 @@ const navBar = `
 <nav>
     <a 
         href="https://jchimienti89.github.io/machine-learning"
-    class="btn btn-default pull-right">
+    class="btn btn-primary pull-right">
         <i class="fa fa-home"></i>
         </a>
 </button>

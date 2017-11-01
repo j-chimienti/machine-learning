@@ -1,5 +1,3 @@
-
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -22,16 +20,15 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <style>
-      
-        
+
+
         body {
             font-family: 'Muli', 'Helvetica', 'Arial', 'sans-serif';
             background: whitesmoke;
             margin-top: 5vh;
         }
-        
 
-  
+
     </style>
 
 
@@ -39,115 +36,127 @@
 <body>
 
 
-
 <nav>
-    <a 
-        href="https://jchimienti89.github.io/machine-learning"
-    class="btn btn-default pull-right">
+    <a
+            href="https://jchimienti89.github.io/machine-learning"
+            class="btn btn-default pull-right">
         <i class="fa fa-home"></i>
-        </a>
-</button>
+    </a>
+    </button>
 </nav>
 
 <div class="container">
-<div>
-  <ul>
-    <li>
+    <div>
+        <ul>
+            <li>
 
-      <a  class="text-capitalize" href="https://jchimienti89.github.io/machine-learning/iris.html#summary">summary</a>
-    </li>
-    <li><a  class="text-capitalize js-scroll-trigger"  href="https://jchimienti89.github.io/machine-learning/iris.html#results">results</a></li>
-    <li><a  class="text-capitalize js-scroll-trigger"  href="https://jchimienti89.github.io/machine-learning/iris.html#references">references</a></li>
-  </ul>
-</div>, <section id="summary">
-    <h1>Iris Plant Species</h1>
-    
-    <h3>Summary</h3>
+                <a class="text-capitalize" href="https://jchimienti89.github.io/machine-learning/iris.html#summary">summary</a>
+            </li>
+            <li><a class="text-capitalize js-scroll-trigger"
+                   href="https://jchimienti89.github.io/machine-learning/iris.html#results">results</a></li>
+            <li><a class="text-capitalize js-scroll-trigger"
+                   href="https://jchimienti89.github.io/machine-learning/iris.html#references">references</a></li>
+        </ul>
+    </div>
+    ,
+    <section id="summary">
+        <h1>Iris Plant Species</h1>
+
+        <h3>Summary</h3>
+        <p>
+            Fisher’s Iris data base (Fisher, 1936) is perhaps the best known
+            database to be found in the pattern recognition literature. The data
+            set contains 3 classes of 50 instances each, where each class refers
+            to a type of iris plant. One class is linearly separable from the other
+            two; the latter are not linearly separable from each other.
+        </p>
+
+
+        <p><strong>Features</strong></p>
+        <ol>
+            <li>Sepal length</li>
+            <li>Sepal width</li>
+            <li>Petal length</li>
+            <li>
+                <p>Petal width</p>
+            </li>
+            <li>
+                <p>Number of samples: 150</p>
+            </li>
+            <li>
+                <p>Target variable (discrete): 50x Setosa, 50x Versicolor, 50x Virginica</p>
+            </li>
+        </ol>
+
+    </section>
+    <h3 id="results">Results</h3>
+
     <p>
-      Fisher’s Iris data base (Fisher, 1936) is perhaps the best known
-      database to be found in the pattern recognition literature. The data
-      set contains 3 classes of 50 instances each, where each class refers
-      to a type of iris plant. One class is linearly separable from the other
-      two; the latter are not linearly separable from each other.
+        Three classification techniques were applied to the
+        data. The accuracy rates are listed below.
     </p>
 
-
-    <p><strong>Features</strong></p>
-    <ol>
-      <li>Sepal length</li>
-      <li>Sepal width</li>
-      <li>Petal length</li>
-      <li>
-        <p>Petal width</p>
-      </li>
-      <li>
-        <p>Number of samples: 150</p>
-      </li>
-      <li>
-        <p>Target variable (discrete): 50x Setosa, 50x Versicolor, 50x Virginica</p>
-      </li>
-    </ol>
-
-  </section>,<h3 id="results">Results</h3>
-<table class="table table-bordered table-striped">
-<thead>
-<tr>
-<th style="text-align:right">KNN</th>
-<th style="text-align:right">Logistic Reg</th>
-<th style="text-align:right">Linear SVC</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:right"> 0.977778</td>
-<td style="text-align:right">0.977778</td>
-<td style="text-align:right">0.933333</td>
-</tr>
-</tbody>
-</table>
-<p><em>Feature Importance</em></p>
-<table class="table table-bordered table-striped">
-<thead>
-<tr>
-<th>Rank</th>
-<th>Feature</th>
-<th style="text-align:right">Importance</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>Petal length</td>
-<td style="text-align:right">0.458107</td>
-</tr>
-<tr>
-<td>2</td>
-<td>Petal width</td>
-<td style="text-align:right">0.408683</td>
-</tr>
-<tr>
-<td>3</td>
-<td>Sepal length</td>
-<td style="text-align:right">0.107372</td>
-</tr>
-<tr>
-<td>4</td>
-<td>Sepal width</td>
-<td style="text-align:right">0.025838</td>
-</tr>
-</tbody>
-</table>
-, <section id="references">
-    <h3>References</h3>
-    <ul>
-      <li>Source: <a
-        href="https://archive.ics.uci.edu/ml/datasets/Iris">https://archive.ics.uci.edu/ml/datasets/Iris</a>
-      </li>
-      <li>Bache, K. &amp; Lichman, M. (2013). UCI Machine Learning Repository. Irvine, CA: University of California,
-        School of Information and Computer Science.
-      </li>
-    </ul>
-  </section>
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th style="text-align:right">KNN</th>
+            <th style="text-align:right">Logistic Reg</th>
+            <th style="text-align:right">Linear SVC</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td style="text-align:right"> 0.977778</td>
+            <td style="text-align:right">0.977778</td>
+            <td style="text-align:right">0.933333</td>
+        </tr>
+        </tbody>
+    </table>
+    <p><em>Feature Importance</em></p>
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>Rank</th>
+            <th>Feature</th>
+            <th style="text-align:right">Importance</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>Petal length</td>
+            <td style="text-align:right">0.458107</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Petal width</td>
+            <td style="text-align:right">0.408683</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Sepal length</td>
+            <td style="text-align:right">0.107372</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Sepal width</td>
+            <td style="text-align:right">0.025838</td>
+        </tr>
+        </tbody>
+    </table>
+    ,
+    <section id="references">
+        <h3>References</h3>
+        <ul>
+            <li>Source: <a
+                    href="https://archive.ics.uci.edu/ml/datasets/Iris">https://archive.ics.uci.edu/ml/datasets/Iris</a>
+            </li>
+            <li>Bache, K. &amp; Lichman, M. (2013). UCI Machine Learning Repository. Irvine, CA: University of
+                California,
+                School of Information and Computer Science.
+            </li>
+        </ul>
+    </section>
 
 </div>
 
@@ -155,7 +164,6 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>

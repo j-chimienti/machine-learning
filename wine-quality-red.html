@@ -1,5 +1,3 @@
-
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -22,16 +20,15 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <style>
-      
-        
+
+
         body {
             font-family: 'Muli', 'Helvetica', 'Arial', 'sans-serif';
             background: whitesmoke;
             margin-top: 5vh;
         }
-        
 
-  
+
     </style>
 
 
@@ -39,116 +36,126 @@
 <body>
 
 
-
 <nav>
-    <a 
-        href="https://jchimienti89.github.io/machine-learning"
-    class="btn btn-default pull-right">
+    <a
+            href="https://jchimienti89.github.io/machine-learning"
+            class="btn btn-default pull-right">
         <i class="fa fa-home"></i>
-        </a>
-</button>
+    </a>
+    </button>
 </nav>
 
 <div class="container">
-<div>
-  <ul>
-    <li>
+    <div>
+        <ul>
+            <li>
 
-      <a  class="text-capitalize" href="https://jchimienti89.github.io/machine-learning/wine-quality-red.html#summary">summary</a>
-    </li>
-    <li><a  class="text-capitalize js-scroll-trigger"  href="https://jchimienti89.github.io/machine-learning/wine-quality-red.html#results">results</a></li>
-    <li><a  class="text-capitalize js-scroll-trigger"  href="https://jchimienti89.github.io/machine-learning/wine-quality-red.html#references">references</a></li>
-  </ul>
-</div>,<h3 id="summary">Summary</h3>
-<p> Due to privacy and logistic issues, only physicochemical (inputs) and sensory (the output) variables are available (e.g. there is no data about grape types, wine brand, wine selling price, etc.). </p>
-,<h3 id="results">Results</h3>
-<table class="table table-bordered table-striped">
-<thead>
-<tr>
-<th>KNN</th>
-<th>Logistic Regression</th>
-<th>Linear SVC</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td> 0.558333</td>
-<td>0.627083</td>
-<td>0.614583</td>
-</tr>
-</tbody>
-</table>
-<p><em>Feature Importance</em></p>
-<table class="table table-bordered table-striped">
-<thead>
-<tr>
-<th>num</th>
-<th>Feature</th>
-<th>Importance</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>alcohol</td>
-<td>0.139313</td>
-</tr>
-<tr>
-<td>2</td>
-<td>sulphates</td>
-<td>0.115662</td>
-</tr>
-<tr>
-<td>3</td>
-<td>volatile acidity</td>
-<td>0.108089</td>
-</tr>
-<tr>
-<td>4</td>
-<td>total sulfur dioxide</td>
-<td>0.102579</td>
-</tr>
-<tr>
-<td>5</td>
-<td>density</td>
-<td>0.087899</td>
-</tr>
-<tr>
-<td>6</td>
-<td>chlorides</td>
-<td>0.078694</td>
-</tr>
-<tr>
-<td>7</td>
-<td>pH</td>
-<td>0.077515</td>
-</tr>
-<tr>
-<td>8</td>
-<td>fixed acidity</td>
-<td>0.075735</td>
-</tr>
-<tr>
-<td>9</td>
-<td>citric acid</td>
-<td>0.075266</td>
-</tr>
-<tr>
-<td>10</td>
-<td>residual sugar</td>
-<td>0.071744</td>
-</tr>
-<tr>
-<td>11</td>
-<td>free sulfur dioxide</td>
-<td>0.067503</td>
-</tr>
-</tbody>
-</table>
-,<h3 id="references">References</h3>
-<ol>
-<li><a href="http://archive.ics.uci.edu/ml/datasets/Wine+Quality">http://archive.ics.uci.edu/ml/datasets/Wine+Quality</a></li>
-</ol>
+                <a class="text-capitalize"
+                   href="https://jchimienti89.github.io/machine-learning/wine-quality-red.html#summary">summary</a>
+            </li>
+            <li><a class="text-capitalize js-scroll-trigger"
+                   href="https://jchimienti89.github.io/machine-learning/wine-quality-red.html#results">results</a></li>
+            <li><a class="text-capitalize js-scroll-trigger"
+                   href="https://jchimienti89.github.io/machine-learning/wine-quality-red.html#references">references</a>
+            </li>
+        </ul>
+    </div>
+    <h3 id="summary">Summary</h3>
+    <p> Due to privacy and logistic issues, only physicochemical (inputs) and sensory (the output) variables are
+        available (e.g. there is no data about grape types, wine brand, wine selling price, etc.). </p>
+    <h3 id="results">Results</h3>
+    <p>
+        Accuracy results from the three applied machine
+        learning algorithms are posted below.
+    </p>
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th class="text-right">KNN</th>
+            <th class="text-right">Logistic Regression</th>
+            <th class="text-right">Linear SVC</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="text-right"> 0.558333</td>
+            <td class="text-right">0.627083</td>
+            <td class="text-right">0.614583</td>
+        </tr>
+        </tbody>
+    </table>
+    <h3>Feature Importance</h3>
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Feature</th>
+            <th class="text-right">Importance</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td class="text-capitalize">alcohol</td>
+            <td class="text-right">0.139313</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td class="text-capitalize">sulphates</td>
+            <td class="text-right">0.115662</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td class="text-capitalize">volatile acidity</td>
+            <td class="text-right">0.108089</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td class="text-capitalize">total sulfur dioxide</td>
+            <td class="text-right">0.102579</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td class="text-capitalize">density</td>
+            <td class="text-right">0.087899</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td class="text-capitalize">chlorides</td>
+            <td class="text-right">0.078694</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>pH</td>
+            <td class="text-right">0.077515</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td class="text-capitalize">fixed acidity</td>
+            <td class="text-right">0.075735</td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td class="text-capitalize">citric acid</td>
+            <td class="text-right">0.075266</td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td class="text-capitalize">residual sugar</td>
+            <td class="text-right">0.071744</td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td class="text-capitalize">free sulfur dioxide</td>
+            <td class="text-right">0.067503</td>
+        </tr>
+        </tbody>
+    </table>
+    <h3 id="references">References</h3>
+    <ol>
+        <li><a href="http://archive.ics.uci.edu/ml/datasets/Wine+Quality">http://archive.ics.uci.edu/ml/datasets/Wine+Quality</a>
+        </li>
+    </ol>
 
 </div>
 
@@ -156,7 +163,6 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>

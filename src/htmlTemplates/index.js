@@ -55,7 +55,7 @@ const footer = `
 const navBar = `
 <nav>
     <a 
-        href="https://jchimienti89.github.io/machine-learning"
+        href="https://j-chimienti.github.io/machine-learning"
     class="btn btn-primary pull-right">
         <i class="fa fa-home"></i>
         </a>
@@ -67,10 +67,10 @@ const navLinks = (path = 'iris.html') => `<div>
   <ul>
     <li>
 
-      <a  class="text-capitalize" href="https://jchimienti89.github.io/machine-learning/${path}#summary">summary</a>
+      <a  class="text-capitalize" href="https://j-chimienti.github.io/machine-learning/${path}#summary">summary</a>
     </li>
-    <li><a  class="text-capitalize js-scroll-trigger"  href="https://jchimienti89.github.io/machine-learning/${path}#results">results</a></li>
-    <li><a  class="text-capitalize js-scroll-trigger"  href="https://jchimienti89.github.io/machine-learning/${path}#references">references</a></li>
+    <li><a  class="text-capitalize js-scroll-trigger"  href="https://j-chimienti.github.io/machine-learning/${path}#results">results</a></li>
+    <li><a  class="text-capitalize js-scroll-trigger"  href="https://j-chimienti.github.io/machine-learning/${path}#references">references</a></li>
   </ul>
 </div>`;
 

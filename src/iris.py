@@ -1,6 +1,6 @@
 from sklearn import datasets
 
-from classify import Classify
+from analysis import Classify
 
 import pandas as pd
 

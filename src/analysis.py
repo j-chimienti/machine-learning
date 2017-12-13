@@ -20,198 +20,97 @@ KNN = neighbors.KNeighborsClassifier()
 
 logistic = linear_model.LogisticRegression(C=1e5)
 
+forest = RandomForestClassifier(n_estimators=10000,
+                                random_state=0,
+                                n_jobs=-1)
 
-class Classify():
-    '''
 
+def classify(X, y, standardize_data=False, types=['KNN', 'svc', 'log'], columns=None):
+    X_train, X_test, y_train, y_test = split_test_data(X, y)
 
-      @param X Array<any>
-      @param y Array<String>
-      @param columns Array<String>
+    X_TRAIN = X_train
+    X_TEST = X_test
 
+    if standardize_data:
+        X_train_std, X_test_std = standardize(X_train, X_test)
+        X_TRAIN = X_train_std
+        X_TEST = X_test_std
 
-    '''
+    scores = {}
 
-    def __init__(self, X, y, standardizeData=False, types=['KNN', 'svc', 'log'], columns=None):
+    predictions = {}
 
-        self.forest = RandomForestClassifier(n_estimators=10000,
-                                             random_state=0,
-                                             n_jobs=-1)
+    for type_ in types:
+        classifier = KNN if type_ == 'KNN' else logistic if type_ == 'log' else svc if type_ == 'svc' else None
 
-        self.columns = columns
+        classifier.fit(X_TRAIN, y_train)
 
-        self.standardizeData = standardizeData
+        predictions[type_] = classifier.predict(X_TEST)
 
-        classifiers = {}
+        scores[type_] = classifier.score(X_test, y_test)
 
-        classifiers['KNN'] = KNN
-        classifiers["log"] = logistic
-        classifiers["svc"] = svc
+    run_forest(X_TRAIN, y_train)
+    display_scores(scores)
 
-        self.classifiers = classifiers
 
-        fitData = {}
+def split_test_data(X, y):
+    X_train, X_test, y_train, y_test = \
+        train_test_split(X, y, test_size=0.3, random_state=0)
 
-        fitData['KNN'] = None
-        fitData['log'] = None
-        fitData['svc'] = None
+    return X_train, X_test, y_train, y_test
 
-        self.fitData = fitData
 
-        predictions = {}
+def display_scores(scores):
+    print('')
 
-        predictions['KNN'] = None
-        predictions['log'] = None
-        predictions['svc'] = None
+    print('### Results')
 
-        self.predictions = predictions
+    print('')
 
-        self.X_train = None
-        self.X_test = None
-        self.y_train = None
-        self.y_test = None
+    print('KNN     | Logistic Reg    | SVC      ')
 
-        self.X_train_std = None
+    print('------- | --------------- | -------- ')
 
-        self.X_test_std = None
+    print('{:,.5f}  | {:,.5f}   | {:,.5f}'.format(scores['KNN'], scores['log'], scores['svc']))
 
-        scores = {}
 
-        scores['KNN'] = None
-        scores['log'] = None
-        scores['svc'] = None
+def standardize(X_train, X_test):
+    X_train_std = SCALER.fit_transform(X_train)
 
-        self.scores = scores
+    X_test_std = SCALER.transform(X_test)
 
-        self.X_TRAIN = None
-        self.X_TEST = None
+    return X_train_std, X_test_std
 
-        self.splitTestData(X, y)
 
-        self.handleStandardizingData()
-        self.main(X, y, types)
+def run_forest(X, y):
+    spinner.start()
 
-    def handleStandardizingData(self):
+    forest.fit(X, y)
 
-        if self.standardizeData:
-            self.standardize()
+    spinner.stop()
 
-        self.X_TRAIN = self.X_train if not self.standardizeData else self.X_train_std
+    return True
 
-        self.X_TEST = self.X_test if not self.standardizeData else self.X_test_std
 
-    def main(self, X, y, types):
+def print_feature_importances():
+    feature_importances_ = forest.feature_importances_
 
-        for _ in range(len(types)):
-            type = types[_]
+    sorted_features = np.argsort(feature_importances_)[::-1]
 
-            self.fitAndPredict(type)
+    print('')
 
-            self.scores[type] = self.score(type)
+    print('*Feature Importance*')
 
-        self.printComparison()
+    print('')
 
-        self.run_forest()
+    print('Rank      |    Feature     | Importance')
 
-        if self.columns:
-            self.print_feature_importances()
+    print(':-------- | :------------- | ---------:')
 
-            # return self.scores
+    num = 0
 
-    def splitTestData(self, X, y):
-        X_train, X_test, y_train, y_test = \
-            train_test_split(X, y, test_size=0.3, random_state=0)
+    for i in sorted_features:
+        num += 1
+    print('{} | {:f}'.format(num, float(feature_importances_[i])))
 
-        self.X_train = X_train
-
-        self.X_test = X_test
-
-        self.y_train = y_train
-
-        self.y_test = y_test
-
-    def assertValidType(self, type):
-        assert (type == 'KNN' or type == 'log' or type == 'svc')
-
-    def score(self, type):
-        classifier = self.classifiers[type]
-
-        return classifier.score(self.X_TEST, self.y_test)
-
-    def fitAndPredict(self, type):
-
-        assert (type)
-
-        self.fit(type)
-
-        self.predict(type)
-
-    def fit(self, type="KNN"):
-        self.assertValidType(type)
-
-        classifier = self.classifiers[type]
-
-        self.fitData[type] = classifier.fit(self.X_TRAIN, self.y_train)
-
-    def predict(self, type="KNN"):
-        self.assertValidType(type)
-
-        classifier = self.classifiers[type]
-
-        self.predictions[type] = classifier.predict(self.X_TEST)
-
-    def printComparison(self):
-
-        print('')
-        print('### Results')
-
-        print('')
-
-        print('KNN | Logistic Reg    | SVC      ')
-
-        print('--------: | --------: | --------:')
-
-        # print('% .4f' % self.scores['KNN'])
-
-
-        print('{:f}     | {:f}       | {:f}'.format(self.scores['KNN'], self.scores['log'], self.scores['svc']))
-
-    def standardize(self):
-
-        self.X_train_std = SCALER.fit_transform(self.X_train)
-
-        self.X_test_std = SCALER.transform(self.X_test)
-
-    def run_forest(self):
-
-        spinner.start()
-
-        self.forest.fit(self.X_TRAIN, self.y_train)
-
-        spinner.stop()
-
-        return True
-
-    def print_feature_importances(self):
-
-        feature_importances_ = self.forest.feature_importances_
-
-        sortedFeatures = np.argsort(feature_importances_)[::-1]
-
-        print('')
-
-        print('*Feature Importance*')
-
-        print('')
-
-        print('Rank      |    Feature     | Importance')
-
-        print(':-------- | :------------- | ---------:')
-
-        num = 0
-
-        for i in sortedFeatures:
-            num += 1
-            print('{} | {} | {:f}'.format(num, self.columns[i], float(feature_importances_[i])))
-
-        print('')
+    print('')

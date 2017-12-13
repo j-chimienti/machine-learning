@@ -1,6 +1,6 @@
 from sklearn import datasets
 
-from analysis import Classify
+from analysis import classify
 
 import pandas as pd
 
@@ -13,7 +13,7 @@ X = iris.data
 y = iris.target
 
 columns = [
-  'Sepal length', 'Sepal width', "Petal length", "Petal width"
+    'Sepal length', 'Sepal width', "Petal length", "Petal width"
 ]
 
 Dataframe = pd.DataFrame(X)
@@ -28,9 +28,4 @@ print('# Iris')
 
 print('')
 
-classifier = Classify(X_, y, standardizeData=False, columns = columns)
-
-
-
-
-
+classify(X_, y, standardize_data=False, columns=columns)

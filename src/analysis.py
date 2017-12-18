@@ -49,8 +49,12 @@ def classify(X, y, standardize_data=False, types=['KNN', 'svc', 'log'], columns=
 
         scores[type_] = classifier.score(X_test, y_test)
 
-    run_forest(X_TRAIN, y_train)
-    display_scores(scores)
+    forest_result = run_forest(X_TRAIN, y_train)
+
+
+    # display_scores(scores)
+
+    return scores, forest_result
 
 
 def split_test_data(X, y):
@@ -74,6 +78,9 @@ def display_scores(scores):
     print('{:,.5f}  | {:,.5f}   | {:,.5f}'.format(scores['KNN'], scores['log'], scores['svc']))
 
 
+    return scores
+
+
 def standardize(X_train, X_test):
     X_train_std = SCALER.fit_transform(X_train)
 
@@ -85,11 +92,11 @@ def standardize(X_train, X_test):
 def run_forest(X, y):
     spinner.start()
 
-    forest.fit(X, y)
+    forest_fit_ = forest.fit(X, y)
 
     spinner.stop()
 
-    return True
+    return forest_fit_
 
 
 def print_feature_importances():
@@ -114,3 +121,7 @@ def print_feature_importances():
     print('{} | {:f}'.format(num, float(feature_importances_[i])))
 
     print('')
+
+
+
+target = map(lambda x: 'setosa' if x == 0 else 'versicolor' if x == 1 else 'virginica' if x == 2, iris['target'])

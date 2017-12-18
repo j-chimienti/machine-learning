@@ -6,12 +6,6 @@ from sklearn.model_selection import train_test_split
 
 from sklearn.preprocessing import StandardScaler
 
-import numpy as np
-
-from halo import Halo
-
-spinner = Halo(text="Calculating Feature Importance", spinner='dots')
-
 SCALER = StandardScaler()
 
 svc = svm.LinearSVC()
@@ -24,37 +18,35 @@ forest = RandomForestClassifier(n_estimators=10000,
                                 random_state=0,
                                 n_jobs=-1)
 
+types = ['KNN', 'svc', 'log']
 
-def classify(X, y, standardize_data=False, types=['KNN', 'svc', 'log'], columns=None):
-    X_train, X_test, y_train, y_test = split_test_data(X, y)
 
-    X_TRAIN = X_train
-    X_TEST = X_test
+def classify(X, y, standardize_data=False):
+    x_train, x_test, y_train, y_test = split_test_data(X, y)
 
     if standardize_data:
-        X_train_std, X_test_std = standardize(X_train, X_test)
-        X_TRAIN = X_train_std
-        X_TEST = X_test_std
+        X_train_std, X_test_std = standardize(x_train, x_test)
+
+        x_train = X_train_std
+
+        x_test = X_test_std
 
     scores = {}
 
     predictions = {}
 
     for type_ in types:
-        classifier = KNN if type_ == 'KNN' else logistic if type_ == 'log' else svc if type_ == 'svc' else None
+        classifier = {'KNN': KNN, 'log': logistic, 'svc': svc}.get(type_, '')
 
-        classifier.fit(X_TRAIN, y_train)
+        classifier.fit(x_train, y_train)
 
-        predictions[type_] = classifier.predict(X_TEST)
+        predictions[type_] = classifier.predict(x_test)
 
-        scores[type_] = classifier.score(X_test, y_test)
+        scores[type_] = classifier.score(x_test, y_test)
 
-    forest_result = run_forest(X_TRAIN, y_train)
+    forest.fit(x_train, y_train)
 
-
-    # display_scores(scores)
-
-    return scores, forest_result
+    return scores, predictions, forest.feature_importances_
 
 
 def split_test_data(X, y):
@@ -64,64 +56,9 @@ def split_test_data(X, y):
     return X_train, X_test, y_train, y_test
 
 
-def display_scores(scores):
-    print('')
-
-    print('### Results')
-
-    print('')
-
-    print('KNN     | Logistic Reg    | SVC      ')
-
-    print('------- | --------------- | -------- ')
-
-    print('{:,.5f}  | {:,.5f}   | {:,.5f}'.format(scores['KNN'], scores['log'], scores['svc']))
-
-
-    return scores
-
-
 def standardize(X_train, X_test):
     X_train_std = SCALER.fit_transform(X_train)
 
     X_test_std = SCALER.transform(X_test)
 
     return X_train_std, X_test_std
-
-
-def run_forest(X, y):
-    spinner.start()
-
-    forest_fit_ = forest.fit(X, y)
-
-    spinner.stop()
-
-    return forest_fit_
-
-
-def print_feature_importances():
-    feature_importances_ = forest.feature_importances_
-
-    sorted_features = np.argsort(feature_importances_)[::-1]
-
-    print('')
-
-    print('*Feature Importance*')
-
-    print('')
-
-    print('Rank      |    Feature     | Importance')
-
-    print(':-------- | :------------- | ---------:')
-
-    num = 0
-
-    for i in sorted_features:
-        num += 1
-    print('{} | {:f}'.format(num, float(feature_importances_[i])))
-
-    print('')
-
-
-
-target = map(lambda x: 'setosa' if x == 0 else 'versicolor' if x == 1 else 'virginica' if x == 2, iris['target'])
